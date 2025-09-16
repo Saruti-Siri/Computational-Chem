@@ -1,0 +1,14 @@
+#dont forget the input
+sed -i s/1-/-1/g $1
+sed -i '/OC2/ s/$/-1/' $1
+sed -i '/H3  MET/ s/$/+1/' $1
+sed -i '/CB  LYS/ s/$/+1/' $1
+sed -i '/CB  ARG/ s/$/+1/' $1
+sed -i '/CB  GLU/ s/$/-1/' $1
+sed -i '/CB  ASP/ s/$/-1/' $1
+sed -i '/CB  HIP/ s/$/+1/' $1
+sed -i 's/CL/Cl/g' $1
+sed -i '/Cl/ s/$/-1/' $1
+sed -i 's/NA/Na/g' $1
+sed -i '/Na/ s/$/a+1/' $1
+sed -i '/NZ  RET/ s/$/+1/' $1

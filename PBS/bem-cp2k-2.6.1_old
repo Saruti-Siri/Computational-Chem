@@ -1,0 +1,129 @@
+#!/bin/bash
+
+nodes=1
+cores=1
+mem=2000
+walltime=504
+queue=main
+
+if [ $# -lt 1 ]
+then
+  echo "Usage: $0 input_file [parameters]"
+  echo "Parameters:"
+  echo "-q queue (default - $queue)"
+  echo "-n nodes (default - $nodes)"
+  echo "-p cores (per node, default - $cores)"
+  echo "-m memory (per node, in MB, default - $mem)"
+  echo "-w walltime (in hours, default - $walltime)"
+  exit 1
+fi
+
+param_err=0
+unset input_file
+
+until [ -z $1 ]
+do
+        if [ $1 = "-q" ]
+        then
+                queue="$2"
+                shift; shift
+	elif [ $1 = "-n" ]
+        then
+                nodes="$2"
+                shift; shift
+                if [ -n "`echo $nodes | grep '[^[:digit:]]'`" ]
+                then
+                        echo "Nodes value must be a number!"
+                        param_err=1
+		fi 
+        elif [ $1 = "-p" ]
+        then
+                cores="$2"
+                shift; shift
+                if [ -n "`echo $cores | grep '[^[:digit:]]'`" ]
+                then
+                        echo "Cores value must be a number!"
+                        param_err=1
+                fi
+        elif [ $1 = "-m" ]
+        then
+                mem=$2
+                shift; shift
+                if [ -n "`echo $mem | grep '[^[:digit:]]'`" ]
+                then
+                        echo "Memory size must be a number!"
+                        param_err=1
+                fi
+        elif [ $1 = "-w" ]
+        then
+                walltime="$2"
+                shift; shift
+                if [ -n "`echo $walltime | grep '[^[:digit:]]'`" ]
+                then
+                        echo "Walltime must be a number!"
+                        param_err=1
+                fi
+        elif [ -n "`echo $1 | grep ^-`" ]
+        then
+                echo "Unknown option: $1"
+                param_err=1
+        else
+                if [ -z "$input_file" ]
+                then
+                        input_file=$1
+                        shift
+                        if [ ! -f $input_file ]
+                        then
+                                echo "Input file $input_file is missing!"
+                                param_err=1
+                        fi
+                else
+                        echo "Unknown parameter: $1"
+			shift
+                        param_err=1
+                fi
+        fi
+done
+
+if [ -z "$input_file" ]
+then
+        echo "There is no input file specification!"
+        param_err=1
+fi
+
+if [ $param_err -eq 1 ]
+then
+        exit 1
+fi
+
+input_f=$(basename "$input_file")
+input_fname="${input_f%.*}"
+
+echo "The job is being submitted with the following parameters:"
+echo
+printf "\t%-12s %s\n" "queue" $queue
+printf "\t%-12s %s\n" "nodes" $nodes
+printf "\t%-12s %s (per node)\n" "cores" $cores
+printf "\t%-12s %s MB (per node)\n" "memory" $mem
+printf "\t%-12s %s hours\n" "walltime" $walltime
+echo
+
+CURDIR=`pwd`
+
+cat << EOF | qsub -r n
+#!/bin/bash
+#PBS -q $queue
+#PBS -l select=$nodes:ncpus=$cores:mpiprocs=$cores:mem=${mem}MB
+#PBS -m be
+#PBS -N ${input_fname:0:15}
+#PBS -l software=cp2k-2.6.1
+#PBS -l walltime=${walltime}:00:00
+
+
+module load cp2k/2.6.1-gcc4.9.2
+
+cd \$PBS_O_WORKDIR
+
+mpirun -n $(($cores * $nodes)) /usr/local/cp2k/gcc-4.9.2/2.6.1/bin/cp2k.popt $input_file &> $input_fname.log
+
+EOF

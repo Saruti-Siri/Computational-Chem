@@ -1,0 +1,15 @@
+sed -n '/ECP/q;p' MOLECULE.mol > raw1
+sed /Charge/d raw1 > raw2
+sed -n '/Atom/,$p' raw2 > raw3a
+tail -n +2 raw3a > raw3
+a=`wc -l < raw3`
+sed -i '1s/^/ \n/' raw3
+sed "1s/^/$a\n/" raw3 > QM.xyz
+
+sed '/ECP/,$!d' MOLECULE.mol > raw1
+sed /Charge/d raw1 > raw2
+a=`wc -l < raw2`
+sed -i '1s/^/ \n/' raw2
+sed "1s/^/$a\n/" raw2 > MM.xyz
+
+rm raw*

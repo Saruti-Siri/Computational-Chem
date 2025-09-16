@@ -1,0 +1,200 @@
+#!/bin/bash 
+#
+# 0.1 (2015.07.14)
+# - first prototype
+
+nodes=1
+cores=5
+mem=2000
+walltime=20
+queue=main
+
+if [ $# -lt 1 ]
+then
+  echo "Usage: $0 input_file [parameters]"
+  echo "Parameters:"
+  echo "-q queue (default - $queue)"
+  echo "-n nodes (default - $nodes)"
+  echo "-p cores (per node, default - $cores)"
+  echo "-m memory (per node, in MB, default - $mem)"
+  echo "-w walltime (in hours, default - $walltime)"
+  exit 1 
+fi
+
+param_err=0
+unset input_file
+
+until [ -z $1 ]
+do
+        if [ $1 = "-q" ]
+        then
+                queue="$2"
+                shift; shift
+        elif [ $1 = "-n" ]
+        then
+                nodes="$2"
+                shift; shift
+                if [ -n "`echo $nodes | grep [^[:digit:]]`" ]
+                then
+                        echo "Nodes value must be a number!"
+                        param_err=1
+                fi
+ 
+        elif [ $1 = "-p" ]
+        then
+                cores="$2"
+                shift; shift
+                if [ -n "`echo $cores | grep [^[:digit:]]`" ]
+                then
+                        echo "Cores value must be a number!"
+                        param_err=1
+                fi
+        elif [ $1 = "-m" ]
+        then
+                mem=$2
+                shift; shift
+                if [ -n "`echo $mem | grep [^[:digit:]]`" ]
+                then
+                        echo "Memory size must be a number!"
+                        param_err=1
+                fi
+        elif [ $1 = "-w" ]
+        then
+                walltime="$2"
+                shift; shift
+                if [ -n "`echo $walltime | grep [^[:digit:]]`" ]
+                then
+                        echo "Walltime must be a number!"
+                        param_err=1
+                fi
+        elif [ -n "`echo $1 | grep ^-`" ]
+        then
+                echo "Unknown option: $1"
+                param_err=1
+        else
+                if [ -z "$input_file" ]
+                then
+                        input_file=$1
+                        shift
+                        if [ ! -f $input_file ]
+                        then
+                                echo "Input file $input_file is missing!"
+                                param_err=1
+                        fi
+                else
+                        echo "Unknown parameter: $1"
+			shift; shift
+                        param_err=1
+                fi
+        fi
+done
+
+if [ $param_err -eq 1 ]
+then
+        exit 1
+fi
+
+if [ -z "$input_file" ]
+then
+        echo "You have to specify the input file!"
+        exit 1
+fi
+
+input_f=$(basename "$input_file")
+input_fname="${input_f%.*}"
+
+
+echo "The job is being submitted with the following parameters:" 1>&2
+echo 1>&2
+printf "\t%-12s %s\n" "queue" $queue 1>&2
+printf "\t%-12s %s\n" "nodes" $nodes 1>&2
+printf "\t%-12s %s\n" "cores" $cores 1>&2
+printf "\t%-12s %s MB (per node)\n" "memory" $mem 1>&2
+printf "\t%-12s %s hours\n" "walltime" $walltime 1>&2
+echo 1>&2
+
+Project="`basename $input_file .inp`"
+CURDIR="`pwd`"
+
+export CURDIR Project
+
+if [ ! -f ${Project}.inp.ScfOrb.input ];
+then
+    echo "Plku z orbitalami SCF brak"
+else
+   ln -sfv ${Project}.inp.ScfOrb.input INPORB
+fi
+if [ ! -f ${Project}.inp.RasOrb.input ];
+then
+    echo "Plku z orbitalami RASSCF brak"
+else
+   ln -sfv ${Project}.inp.RasOrb.input INPORB
+fi
+if [ ! -f ${Project}.inp.Pt2Orb.input ];
+then
+    echo "Plku z orbitalami CASPT2 brak"
+else
+   ln -sfv ${Project}.inp.Pt2Orb.input INPORB
+fi
+
+
+cat <<EOF | qsub -r n
+#!/bin/bash
+#PBS -q $queue
+#PBS -l select=$nodes:ncpus=$cores:mpiprocs=$cores:mem=${mem}MB
+#PBS -N ${input_fname:0:15} 
+#PBS -l walltime=${walltime}:00:00
+
+module load binutils/2.25 
+module load openmpi/1.8.4-gcc5.1.0
+module load mkl/10.3
+export CC=mpicc  
+export CXX=mpicxx
+export F90=mpif90
+export F77=mpif77 
+export FC=mpif90
+
+#export WorkDir=/scratch/pbs.\$PBS_JOBID
+export WorkDir=/lustre/scratch/tmp/pbs.\$PBS_JOBID
+export MOLCAS_MEM=$(( $mem * 8 / 10 / $cores ))
+export Project=$input_f
+#export MOLCAS_LICENSE=/home/addiw17/molcas_licencja/
+#export MOLCAS=/home/saruti/Molcas/OpenMolcas/builds/gnu_normal_mpi_ga_mkl/
+
+
+#rm -rf \$WorkDir
+
+#mkdir -p \$WorkDir
+
+mkdir \$WorkDir
+
+##trap del_scratch TERM
+
+##touch \$WorkDir/\$PBS_JOBID
+
+cp ${CURDIR}/* \$WorkDir 
+cd \$WorkDir
+
+#/bin/find $CURDIR -name \*.xyz -exec cp {} \$WorkDir \;
+#/bin/find $CURDIR -name \*.prm -exec cp {} \$WorkDir \;
+
+
+pymolcas -np $cores ${CURDIR}/$input_f >&${CURDIR}/${Project}.log
+
+cp *MpProp $CURDIR
+
+cd $CURDIR
+
+tar czf orbitals-results.tar.gz  *log  *molden  *Orb
+
+rm  *log *molden *Orb
+
+#mkdir $HOME/tmp/scratch/pbs./$Project-\$PBS_JOBID
+
+#cp  *tar.gz $HOME/tmp/scratch/pbs./$Project-\$PBS_JOBID
+
+#rm *tar.gz
+
+rm -rf $WorkDir
+
+EOF
