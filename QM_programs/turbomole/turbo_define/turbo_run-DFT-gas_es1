@@ -1,0 +1,39 @@
+#activate in 'noswitch' of MN15 and copy MOLECULE.mol to wrkdir
+#if [ "$#" -ne 1 ]; then
+#    printf 'Specify symmetry of molecule! possible choices: cs, c2h, c2v, cinfv, D2h\n' >&2
+#    exit 1
+#fi
+#cp /home/saruti/important_scripts/scripts/turbo_define/input_DFT_"$1" .
+
+cp /home/saruti/important_scripts/scripts/mol-Dalton2xyz .
+cp /home/saruti/important_scripts/scripts/convert_bohr_ang .
+./mol-Dalton2xyz
+./convert_bohr_ang QM.xyz
+x2t QM_ang.xyz > coord
+define < input_DFT_[c,D]*
+sed -i -e 's/$scfinstab rpas/$scfinstab twophoton rpas/g' control
+sed -i -e 's/#$maxcor    500/$maxcor  30000/g' control
+awk '/soes/,/rpacor/' control > temp
+head -n -1 temp > temp2
+tail -n +2 temp2 > temp3
+awk '{if($2>1)print" "$1"         1-"$2}' temp3 > temp4
+awk '{if($2=1)print" "$1"         "$2}' temp3 >> temp4
+#awk 'FNR==NR{a[$1]; next} !($1 in a)' temp4 temp3 > temp5
+#cat temp4 temp5 > tempf
+sed -i -e '1i$exopt\' temp4
+sed -i '/$rpacor/e cat temp4' control
+rm temp*
+cd ../
+rm -r TPA_curswitch
+cp -r TPA_noswitch/ TPA_curswitch/
+sed -i '/$rpacor/a$curswitchdisengage' TPA_curswitch/control
+cd ../
+rm -r CAMB3LYP M11 BHandHLYP
+cp -r MN15/TPA_noswitch/ CAMB3LYP
+cp -r MN15/ M11
+cp -r MN15/TPA_noswitch/ BHandHLYP
+sed -i -e 's/mn15/cam-b3lyp/g' CAMB3LYP/control
+sed -i -e 's/mn15/m11/g' M11/TPA_curswitch/control
+sed -i -e 's/mn15/m11/g' M11/TPA_noswitch/control
+sed -i -e 's/mn15/bh-lyp/g' BHandHLYP/control
+

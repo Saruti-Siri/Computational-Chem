@@ -1,0 +1,54 @@
+grep -A 1 "linear parallel" escf.log > raw_tpa
+grep -A 4 Oscillator escf.log > raw_osci
+grep -A 19 Ground escf.log > raw-gs_dpm
+grep "Exc. energy:" escf.log > raw-ee
+grep -A 4 "Electric transition dipole moment (length rep.):" escf.log > raw-tdm
+#add es dpm
+#grep "| dipole moment |" escf.log > raw_dipout
+
+#EE
+awk '{print $5}' raw-ee > EE
+#TPA#
+awk '{print $4}' raw_tpa > raw2_tpa
+sed -i '/^[[:space:]]*$/d' raw2_tpa 
+sed -i '/^[a-z]*$/d' raw2_tpa
+awk '!x[$0]++' raw2_tpa > raw3_tpa
+paste EE raw3_tpa > dTPA
+#SYMMETRY#
+grep 'electronic excitation in symmetry' escf.log > raw_sym
+awk '{print $NF}' raw_sym > sym
+#osci#
+grep length raw_osci > raw2_osci
+awk '{print $NF}' raw2_osci > oscillator
+#gs_dpm#
+tail -n4 raw-gs_dpm > raw2-gs_dpm
+awk '{print $4}' raw2-gs_dpm > gsdpm_xyz
+sed -i '/^[[:space:]]*$/d' gsdpm_xyz
+awk '{print $6}' raw2-gs_dpm > kek
+head -n 1 kek > raw3-gs_dpm
+awk '{print $8}' raw2-gs_dpm >> raw3-gs_dpm
+sed -i '/^[[:space:]]*$/d' raw3-gs_dpm
+printf 'a.u.\ndeb\n' > kek
+paste kek raw3-gs_dpm > gs_dpm-au+deb 
+
+cp ~/important_scripts/scripts/skrypt-turbo-escf.py .
+./skrypt-turbo-escf.py 4 0.1 > TPA+OPA
+awk '{print $3}' TPA+OPA > sTPA
+paste sym EE oscillator raw3_tpa sTPA > dat_org
+cat dat_org 
+
+
+rm raw* kek EE temp*
+
+#awk '{print $2 "  " $4 "  " $6 "  "}' xyz_comb_raw > xyz_comb
+#awk '{print $2}' xyz_comb_raw > x_dpm
+#awk '{print $4}' xyz_comb_raw > y_dpm
+#awk '{print $6}' xyz_comb_raw > z_dpm
+#awk 'NR==1{D=$0}{$0=($0-D); print}' x_dpm > x2
+#awk 'NR==1{D=$0}{$0=($0-D); print}' y_dpm > y2
+#awk 'NR==1{D=$0}{$0=($0-D); print}' z_dpm > z2
+#awk 'NR==1{D=$0}{$0=($0-D); print}' dip_debye > DPM.st.swp
+#sed 's/-//g' < DPM.st.swp > DPM.st
+#paste x2 y2 z2 > dpm.txt
+#python skrypt-DPM.py > dpm2.sf 
+#awk '{print $1/0.3934303}' dpm2.sf > DPM.sf

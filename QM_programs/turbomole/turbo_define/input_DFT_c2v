@@ -1,0 +1,39 @@
+
+
+a coord
+desy
+*
+no
+b all aug-cc-pVDZ
+*
+eht
+
+
+
+scf
+iter
+180
+
+dft
+func
+mn15
+on
+grid
+m4
+*
+ri
+m 10000
+on
+*
+ex
+rpas
+*
+a1 1
+a2 2
+b1 1
+b2 2
+*
+rpacor 40000
+*
+
+*

@@ -1,0 +1,96 @@
+$title
+$symmetry c1
+$user-defined bonds    file=coord
+$coord    file=coord
+$optimize
+ internal   off
+ redundant  off
+ cartesian  on
+ global     off
+ basis      off
+$atoms
+c  1-35                                                                        \
+   basis =c aug-cc-pVDZ                                                        \
+   jbas  =c aug-cc-pVDZ
+h  36-104                                                                      \
+   basis =h aug-cc-pVDZ                                                        \
+   jbas  =h aug-cc-pVDZ
+n  105-109                                                                     \
+   basis =n aug-cc-pVDZ                                                        \
+   jbas  =n aug-cc-pVDZ
+o  110-122                                                                     \
+   basis =o aug-cc-pVDZ                                                        \
+   jbas  =o aug-cc-pVDZ
+$basis    file=basis
+$scfmo   file=mos
+$closed shells
+ a       1-209                                  ( 2 )
+$scfiterlimit       60
+$thize     0.10000000E-04
+$thime        5
+$scfdamp   start=0.300  step=0.050  min=0.100
+$scfdump
+$scfintunit
+ unit=30       size=0        file=twoint
+$scfdiis
+$scforbitalshift  automatic=.1
+$drvopt
+   cartesian  on
+   basis      off
+   global     off
+   hessian    on
+   dipole     on
+   nuclear polarizability
+$interconversion  off
+   qconv=1.d-7
+   maxiter=25
+$coordinateupdate
+   dqmax=0.3
+   interpolate  on
+   statistics    5
+$forceupdate
+   ahlrichs numgeo=0  mingeo=3 maxgeo=4 modus=<g|dq> dynamic fail=0.3
+   threig=0.005  reseig=0.005  thrbig=3.0  scale=1.00  damping=0.0
+$forceinit on
+   diag=default
+$energy    file=energy
+$grad    file=gradient
+$forceapprox    file=forceapprox
+$point_charges file=point_bohr
+$scfinstab twophoton rpas
+$soes
+ a            9
+$exopt
+ a            1-9
+$rpacor    60000   in_total
+$rpaconv      4
+$maxcor    40000 MiB  per_core
+$denconv 1d-7
+$dft
+   functional bh-lyp
+   gridsize   m5
+$scfconv   7
+$ricore    20000
+$rij
+$jbas    file=auxbasis
+$disp3 bj
+$rundimensions
+   natoms=122
+   nbf(CAO)=1946
+   nbf(AO)=1840
+$last step     escf
+$orbital_max_rnorm 0.12986787311333E-03
+$last SCF energy change = -2626.0254
+$subenergy  Etot         E1                  Ej                Ex                 Ec                 En                 Disp
+-2626.025376886    -17945.97386624     8303.295162519    -173.3648527227    -14.13220188265     7204.320217351    -.1698359100454
+$charge from ridft
+          0.000 (not to be modified here)
+$dipole from ridft
+  x  -100.96246524493590    y    49.41103370904995    z    39.85710173995484    a.u.
+   | dipole | =  303.1364161044  debye
+$electronic polarizability  1/3 Tr(alpha) =  715.6318  Anisotropy =  574.9713
+           557.27648690
+           165.71206356          1001.51214696
+           -19.89707749           144.24844464           588.10662374
+$last polarizability change = -715.63175
+$end

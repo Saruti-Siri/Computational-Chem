@@ -1,0 +1,9 @@
+while IFS= read line;
+do
+#echo "$line" | find "$line" -type d -exec sh -c '. bem-open-molcas-mpi-loprop' -- {} \ ;
+
+        echo "$line" | for l in $line
+                do
+                        cd "$l" && cp ~/important_scripts/scripts/turbo_define/get_TPA_turbo-escf_symm . && pwd && ./get_TPA_turbo-escf_symm;
+                        done
+done < list

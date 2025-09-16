@@ -1,0 +1,58 @@
+sed -n '/AA/,/@MULTIPOLES/p' POTENTIAL.pot > raw_position
+sed -n '/ORDER 0/,/ORDER 1/p' POTENTIAL.pot > raw_only_charge
+sed -e '1d;$d' raw_position > raw_p2
+awk '{print $2"     "$3"     "$4}' raw_p2 > raw_p3
+column -t raw_p3 > raw_pos
+sed -e '1,2d;$d' raw_only_charge > raw_c2
+awk '{print $2}' raw_c2 > raw_c3
+paste raw_pos raw_c3 > point_raw1
+awk '{print $1"    "$2"     "$3"     "$4}' point_raw1 > point_raw2
+column -t point_raw2 > point_charge
+echo '$end' >> point_charge
+sed -i '1s/^/$point_charges\n/' point_charge
+
+sed -n '/Redistributing multipoles upto 0th order/,/Resulting monopoles:/p' output.log > raw
+grep 'from site' raw > raw_zero
+awk '{print $3}' raw_zero > raw_zero2
+awk -v n=1 '{print $1+n}' raw_zero2 > zero_index_pot
+
+while IFS= read line;
+ do
+	echo "$line" | for l in $line
+		do 
+			sed -i "$l"s/[0-9,.,-]*$/"0.00000000"/g point_charge
+			done
+done < zero_index_pot
+#readjust how much tail takes according to new QM sizes
+sed -n '/Resulting monopoles:/,/Total charge of classical region:/p' output.log > redis
+tail -n+3 redis > redis1
+head -n-2 redis1 > redis
+awk '{print $2+1"  "$3}' redis > redis2
+while read -r line line2;
+ do
+        sed -i "$line"s/[0-9,.,-]*$/"$line2"/g point_charge
+done < redis2
+
+rm *raw* zero_* redis1 redis2
+
+#convert ang to bohr - must be in interactive+turbomole loaded
+
+awk '{print "C  "$1"  "$2"  "$3}' point_charge > pos
+awk '{print $4}' point_charge > charge
+sed -i '1,1d' pos
+sed -i '$d' pos
+sed -i '1,1d' charge
+sed -i '$d' charge
+a=`wc -l < pos`
+sed -i '1s/^/ \n/' pos
+sed "1s/^/$a\n/" pos > pos.xyz
+x2t pos.xyz > pos2
+sed -i '1,1d' pos2
+sed -i '$d' pos2
+#awk 'NF{NF-=1};1' < pos2 > pos3
+awk '{print $1"   "$2"   "$3" "'} pos2 > pos3
+paste pos3 charge > point_bohr
+echo '$end' >> point_bohr
+sed -i '1s/^/$point_charges\n/' point_bohr
+sed -i -e 's/\t/   /g' point_bohr
+rm pos pos2 pos3 pos.xyz charge

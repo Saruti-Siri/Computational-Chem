@@ -1,0 +1,26 @@
+&gateway 
+ title=PSB3-meth caspt2 optimization
+ coord=meth-PSB3.xyz
+ basis=ANO-L-VDZP
+ group=nosym
+ RICD
+
+&seward
+CHOLESKY
+&SCF
+Charge = +1
+>>> export molcas_maxiter=500
+>>> do while
+
+ &seward
+CHOLESKY
+ &rasscf 
+FROZen=7
+Spin=1 
+CHARge=1 
+nactel=6
+ras2=6
+ &caspt2 
+ &slapaf 
+
+>>> enddo

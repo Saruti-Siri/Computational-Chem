@@ -1,0 +1,5 @@
+./mol-Dalton2xyz
+x2t MOLECULE.xyz > coord
+./get_redis
+define < input_DFT_turbo.txt
+sed -i -e 's/$scfinstab rpas/$scfinstab twophoton rpas/g' control

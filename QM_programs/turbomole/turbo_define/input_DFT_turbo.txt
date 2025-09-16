@@ -1,0 +1,40 @@
+
+
+a coord
+*
+no
+b all aug-cc-pVDZ
+*
+eht
+
+1
+
+scf
+iter
+60
+
+ex
+rpas
+*
+a 6
+*
+rpacor 20000
+rpaconv 4
+*
+
+dft
+on
+func bh-lyp
+grid 5
+*
+ri
+m 150
+on
+jbas
+b all aug-cc-pVDZ
+*
+*
+dsp
+bj
+*
+*

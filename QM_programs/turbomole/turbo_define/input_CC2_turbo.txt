@@ -1,0 +1,37 @@
+
+
+a coord
+*
+no
+b all aug-cc-pVDZ
+*
+eht
+
+1
+
+scf
+iter
+60
+
+cc
+freeze
+*
+cbas
+b all aug-cc-pVDZ
+*
+memory
+20000
+ricc2
+cc2
+mxdiis 30
+*
+exci
+irrep=a nexc=6
+spectrum states=all operators=diplen,qudlen
+exprop states=all unrelaxed operators=diplen,qudlen
+*
+resp
+fop unrelaxed operators=diplen,qudlen
+*
+*
+*

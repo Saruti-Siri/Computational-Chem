@@ -1,0 +1,39 @@
+
+
+a coord
+sy c2h
+*
+no
+b all aug-cc-pVDZ
+*
+eht
+
+
+
+scf
+iter
+180
+
+dft
+func
+mn15
+on
+grid
+m4
+*
+ri
+m 10000
+on
+*
+ex
+rpas
+*
+ag 1
+au 2
+bg 1
+bu 2
+*
+rpacor 40000
+*
+
+*
