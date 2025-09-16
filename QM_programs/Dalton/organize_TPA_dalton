@@ -1,0 +1,27 @@
+#get scripts
+cp -r ~/important_scripts/scripts/dpm-dft_scripts/ double*/e5/
+cd double*/e5/dpm-dft_scripts/
+sed -i 's/cc-pVDZ/aug-cc-pVDZ/g' MC.bash
+./MC.bash
+cd ../../../
+cp -r ~/important_scripts/scripts/TPA_DFT-DAL.bash e5/
+cp -r ~/important_scripts/scripts/skrypt-Dalton-TPA.py e5/
+cp -r ~/important_scripts/scripts/evtonm.bash e5/
+cp -r ~/important_scripts/scripts/OPA_osc_str.bash OPA/e5/
+
+#get raw data
+cd OPA/e5/
+./OPA_osc_str.bash
+cp osc_str.txt ../../e5/
+cd ../../e5/
+./TPA_DFT-DAL.bash
+./skrypt-Dalton-TPA.py 4 0.1 > TPA+OPA
+cd ../
+
+#organize
+#for when gDPM is available
+paste e5/NM e5/TPA+OPA e5/delta_TPA double*/e5/dpm-dft_scripts/DPM.txt double*/e5/dpm-dft_scripts/DPM.sf double*/e5/dpm-dft_scripts/DPM_st > temp_org
+#paste e5/NM e5/TPA+OPA e5/delta_TPA double/dpm-dft_scripts/DPM.txt > temp_org
+awk '{print $2" & "$8" & "$4" & "$6" & "$9" & "$11" & "$13}' temp_org > data_org
+cat data_org
+#rm temp_org

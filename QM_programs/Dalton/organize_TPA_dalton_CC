@@ -1,0 +1,18 @@
+#get scripts
+cp -r ~/important_scripts/scripts/skrypt-Dalton-CC.py .
+cp -r ~/important_scripts/scripts/get-cc.bash .
+./get-cc.bash
+./skrypt-Dalton-CC.py 4 0.1 > TPA+OPA
+cp -r /home/saruti/important_scripts/scripts/dpm-cc_scripts .
+cd dpm-cc_scripts
+./MC.bash
+cd ../
+awk '{print $2}' data.txt > delta_TPA
+sed -i '/^[[:space:]]*$/d' delta_TPA
+#organize
+#for when gDPM is available
+#paste tpa/NM tpa/TPA+OPA tpa/delta_TPA double/dpm-dft_scripts/DPM.txt double/dpm-dft_scripts/DPM.sf double/dpm-dft_scripts/DPM_st > temp_org
+paste TPA+OPA delta_TPA dpm-cc_scripts/DPM.txt dpm-cc_scripts/DPM.sf dpm-cc_scripts/DPM.st > temp_org
+awk '{print $2" & "$8" & "$6" & "$4" & "$10" & "$12" & "$13}' temp_org > data_org
+cat data_org
+#rm temp_org
