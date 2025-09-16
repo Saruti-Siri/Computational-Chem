@@ -1,0 +1,162 @@
+#!/bin/bash
+
+partition=normal
+nodes=1
+cores=1
+mem=60
+time_limit=12
+
+# --------------------------------------------   HELP   --------------------------------------------
+
+if [ $# -lt 1 ]
+then
+        echo "Usage: $0 FILE PARAMETERS"
+        echo "Parameters:"
+        echo -e "\t-p PARTITION \t\t Set partition (queue). Default = $partition"
+        echo -e "\t-c CORES \t\t Up to 48. Default = $cores"
+        echo -e "\t-m MEMORY \t\t In GB, up to 180 (must be integer value). Default = ${mem} + 1 (gauss safety margin)"
+        echo -e "\t-t TIME_LIMIT \t\t In hours. Default = $time_limit"
+
+        echo -e "\t-f \t\t\t run formchk on the checkpoint file on the end"
+        echo -e "\t-d PATH \t\t input file directory, default -- current directory"
+        echo -e "\t--copy FILE1 FILE2 ...\t copy additional [checkpoint] files to working directory"
+        exit 1
+fi
+
+# -----------------------------------------   PARAM SORT   -----------------------------------------
+param_err=0
+unset input_file
+
+until [ -z $1 ]
+do
+                if [ $1 = "-p" ]
+                then
+                                partition="$2"
+                                shift; shift
+                elif [ $1 = "-n" ]
+                then
+                                nodes="$2"
+                                shift; shift
+                                if [ -n "`echo $nodes | grep '[^[:digit:]]'`" ]
+                                then
+                                                echo "Nodes value must be a number!"
+                                                param_err=1
+                                fi
+
+                elif [ $1 = "-c" ]
+                then
+                                cores="$2"
+                                shift; shift
+                                if [ -n "`echo $cores | grep '[^[:digit:]]'`" ]
+                                then
+                                                echo "Cores value must be a number!"
+                                                param_err=1
+                                fi
+                elif [ $1 = "-m" ]
+                then
+                                mem=$2
+                                shift; shift
+                                if [ -n "`echo $mem | grep '[^[:digit:]]'`" ]
+                                then
+                                                echo "Memory size must be a number!"
+                                                param_err=1
+                                fi
+                elif [ $1 = "-t" ]
+                then
+                                time_limit="$2"
+                                shift; shift
+                                if [ -n "`echo $time_limit | grep '[^[:digit:]]'`" ]
+                                then
+                                                echo "Time limit must be a number!"
+                                                param_err=1
+                                fi
+                elif [ -n "`echo $1 | grep ^-`" ]
+                then
+                                echo "Unknown option: $1"
+                                param_err=1
+                else
+                                if [ -z "$input_file" ]
+                                then
+                                                input_file=$1
+                                                shift
+                                                if [ ! -f $input_file ]
+                                                then
+                                                                echo "Input file $input_file is missing!"
+                                                                param_err=1
+                                                fi
+                                else
+                                                echo "Unknown parameter: $1"
+                        shift
+                        shift; shift
+                                                param_err=1
+                                fi
+                fi
+done
+
+if [ $param_err -eq 1 ]
+then
+                exit 1
+fi
+
+if [ -z "$input_file" ]
+then
+                echo "You have to specify the input file!"
+                exit 1
+fi
+
+# -----------------------------------------   ACTUAL SUB   -----------------------------------------
+input_f=$(basename "$input_file")
+input_fname="${input_f%.*}"
+
+export CURDIR=`pwd`
+
+cat << EOF | sbatch
+#!/bin/bash
+#SBATCH -p $partition
+#SBATCH -N $nodes
+#SBATCH -c $cores
+#SBATCH -n $cores
+#SBATCH --mem=${mem}GB
+#SBATCH -J ${input_fname}
+#SBATCH -t ${time_limit}:00:00
+#SBATCH --export=none
+#SBATCH -A hpc-andrunio-1716815712
+
+export nc=$cores
+
+module purge
+module load intel/2022a
+
+cd $CURDIR
+#mkdir \$CURDIR/results
+
+export DALTON_TMPDIR=\$TMPDIR
+cp $CURDIR/* \$TMPDIR
+
+#~15.6gb
+#export WRKMEM=2115737600
+#~62.4gb
+#export WRKMEM=8462950400
+#~80gb
+#export WRKMEM=10578688000
+#~190gb
+export WRKMEM=25934848000
+export OMP_NUM_THREADS=$cores
+
+echo $SLURM_JOB_NODELIST
+
+/home/saruti/tmp/dalton64/large_QMMM/build/dalton -noappend -b /home/saruti/tmp/dalton64/large_QMMM/build/basis -o output.log -D -N \$nc $input_f MOLECULE.mol > output.out
+
+EOF
+
+# --------------------------------------------   INFO   --------------------------------------------
+echo "The job is being submitted with the following parameters:" 1>&2
+echo 1>&2
+printf "\t%-15s %s \n" "file" $input_file 1>&2
+printf "\t%-12s %s\n" "partition" $partition 1>&2
+printf "\t%-12s %s\n" "nodes" $nodes 1>&2
+printf "\t%-12s %s\n" "cores" $cores 1>&2
+printf "\t%-12s %s GB (per node)\n" "memory" $mem 1>&2
+printf "\t%-12s %s hours\n" "time limit" $time_limit 1>&2
+echo 1>&2
+

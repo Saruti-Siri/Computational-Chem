@@ -1,0 +1,8 @@
+#arg=folder output from Molcas containing fragments
+cd $1
+pathto="$PWD"
+find * -name '*MpProp' -printf "$pathto/%h\n" > ../exclude.txt
+find ./* -type d -printf "$pathto/%f\n" > ../all.txt
+cd ../
+grep -vf exclude.txt all.txt > nett.txt
+split -l 400 nett.txt piece

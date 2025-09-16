@@ -1,0 +1,11 @@
+while IFS= read line;
+do
+#echo "$line" | find "$line" -type d -exec sh -c '. bem-open-molcas-mpi-loprop' -- {} \ ;
+
+        echo "$line" | for l in $line
+                do
+#                         cd "$l" && rm * ;
+                        cd s1 && rsync -a ./* ../"$l" --exclude output.log --exclude POTENTIAL.pot ;  
+#                        cp ~/important_scripts/scripts/sub-turbomole-7.6.slurm "$l" && cd "$l" && ./sub-turbomole-7.6.slurm egrad -q normal -p 8 -m 60 -w 250 ;
+                        done
+done < list

@@ -1,0 +1,6 @@
+#remove many calc from queue
+input=$1
+while IFS= read line
+do
+  scancel "$line"
+done < "$input"

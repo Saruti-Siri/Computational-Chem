@@ -1,0 +1,3 @@
+find ./ -name '*.e*' -exec grep -Hn "write error" {} \; > error_list
+awk '{print $1}' error_list > temp
+awk '{print substr($1, 1, length($1)-32)}' temp > error_list
