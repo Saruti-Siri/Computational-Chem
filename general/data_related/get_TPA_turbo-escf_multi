@@ -1,0 +1,72 @@
+grep -A 1 "linear parallel" escf.log > raw_tpa
+grep -A 4 Oscillator escf.log > raw_osci
+grep -A 19 Ground escf.log > raw-gs_dpm
+grep "Exc. energy:" escf.log > raw-ee
+grep -A 4 "Electric transition dipole moment (length rep.):" escf.log > raw-tdm
+#add es dpm
+#grep "| dipole moment |" escf.log > raw_dipout
+
+#EE
+awk '{print $5}' raw-ee > EE
+#TPA#
+awk 'FNR==2{print $4};FNR==5{print $4};FNR==8{print $4};FNR==11{print$4};FNR==14{print $4}' raw_tpa > raw2_tpa
+paste EE raw2_tpa > dTPA
+#osci#
+awk 'FNR==5{print $3};FNR==11{print $3};FNR==17{print $3};FNR==23{print$3};FNR==29{print $3}' raw_osci > oscillator 
+#gs_dpm#
+tail -n4 raw-gs_dpm > raw2-gs_dpm
+awk '{print $4}' raw2-gs_dpm > gsdpm_xyz
+sed -i '/^[[:space:]]*$/d' gsdpm_xyz
+awk '{print $6}' raw2-gs_dpm > kek
+head -n 1 kek > raw3-gs_dpm
+awk '{print $8}' raw2-gs_dpm >> raw3-gs_dpm
+sed -i '/^[[:space:]]*$/d' raw3-gs_dpm
+printf 'a.u.\ndeb\n' > kek
+paste kek raw3-gs_dpm > gs_dpm-au+deb
+tail -n 1 raw3-gs_dpm > temp_gsdpm-deb 
+#es_dpm#
+grep "| dipole moment |" ../dpm*/egrad.log > raw-es_dpm
+awk '{print $6" "$7}' raw-es_dpm > es_dpm-au+deb
+awk '{print $9" "$10}' raw-es_dpm >> es_dpm-au+deb
+grep -B 4 "| dipole moment |" ../dpm*/egrad.log > raw-esdpm_xyz
+awk '{print $6}' raw-esdpm_xyz > raw2-esdpm_xyz
+head -n 3 raw2-esdpm_xyz > esdpm_xyz
+#tdm#
+awk 'FNR==5{print $6};FNR==11{print $6};FNR==17{print $6};FNR==23{print$6};FNR==29{print $6}' raw-tdm > tdm_deb
+awk 'FNR==3{print $4};FNR==9{print $4};FNR==15{print $4};FNR==21{print $4};FNR==27{print $4}' raw-tdm > tdm_au 
+
+
+#DPM diff
+#paste gsdpm_xyz esdpm_xyz > raw-comb_xyz
+#awk '{print $1-$2}' raw-comb_xyz > raw2-comb_xyz
+#awk '{print $1*$1}' raw2-comb_xyz > raw-square_xyz
+#awk '{s+=$1} END {print s}' raw-square_xyz > raw3-comb_xyz
+#awk '{print $1^(1/2)}' raw3-comb_xyz > dpm_sf-au
+#awk '{print $1/0.393456}' dpm_sf-au > dpm_sf-deb
+#paste gs_dpm-au+deb es_dpm-au+deb > temp
+#printf 'a.u.\ndeb\n' > kek
+#awk '{print $2-$3}' temp > temp2
+#paste kek temp2 > dpm_st
+#tail -n1 temp2 > temp_esdpm
+
+python skrypt*.py 4 0.1 > sTPA_full
+awk '{print $3}' sTPA_full > sTPA
+rm sTPA_full
+
+paste dTPA sTPA oscillator tdm_deb temp_gsdpm-deb  
+
+
+rm raw* kek EE temp*
+
+#awk '{print $2 "  " $4 "  " $6 "  "}' xyz_comb_raw > xyz_comb
+#awk '{print $2}' xyz_comb_raw > x_dpm
+#awk '{print $4}' xyz_comb_raw > y_dpm
+#awk '{print $6}' xyz_comb_raw > z_dpm
+#awk 'NR==1{D=$0}{$0=($0-D); print}' x_dpm > x2
+#awk 'NR==1{D=$0}{$0=($0-D); print}' y_dpm > y2
+#awk 'NR==1{D=$0}{$0=($0-D); print}' z_dpm > z2
+#awk 'NR==1{D=$0}{$0=($0-D); print}' dip_debye > DPM.st.swp
+#sed 's/-//g' < DPM.st.swp > DPM.st
+#paste x2 y2 z2 > dpm.txt
+#python skrypt-DPM.py > dpm2.sf 
+#awk '{print $1/0.3934303}' dpm2.sf > DPM.sf

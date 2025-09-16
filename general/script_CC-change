@@ -1,0 +1,7 @@
+#remove many calc from queue
+#ls > input
+inp=input
+while IFS= read line
+do
+  cd "$line" && sed -i s/CC3/CC2/g DALTON.dal && cd ../
+done < $inp

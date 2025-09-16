@@ -1,0 +1,7 @@
+#remove many calc from queue
+#ls > input
+inp=input
+while IFS= read line
+do
+  cd "$line" && ./bem2-dalton64-L DALTON.dal -c 1 -m 70 -t 200 && cd ../
+done < $inp

@@ -1,0 +1,4 @@
+./get-cc-turbo*
+./skrypt* 4 0.1 > TPA+OPA
+./symmetry*
+cat data_org

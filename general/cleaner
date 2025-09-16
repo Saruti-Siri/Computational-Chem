@@ -1,0 +1,7 @@
+cd $1 
+mkdir temp
+mv DALTON.dal MOLECULE.mol bem* POTENTIAL.pot temp/
+rm *
+mv temp/* .
+rm -r temp
+cd ../

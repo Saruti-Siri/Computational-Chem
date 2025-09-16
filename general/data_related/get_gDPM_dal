@@ -1,0 +1,9 @@
+grep -A7 "Dipole moment" output.log > raw
+head -n 5 raw > d-temp
+#awk '{print $1}' raw > d-temp
+awk '$0 ~ /[0-9]/' d-temp > gDPM_total
+tail -n 5 raw > dpmxyz
+awk '{print $2}' dpmxyz > debxyz
+sed '1,2d' debxyz > debxyz2
+tr -s '\n' ' ' < debxyz2 > gDPM
+rm dpmxyz debxyz* d-temp raw

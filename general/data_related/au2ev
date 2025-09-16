@@ -1,0 +1,6 @@
+grep -o 'excitation energy,.*' output.log > temp
+awk '{print $6}' temp > temp2
+sort -u temp2 > temp3
+awk '{print $1*27.211324570273 }' temp3 > temp4
+uniq temp4 > EE
+rm temp temp2 temp3 temp4

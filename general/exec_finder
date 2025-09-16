@@ -1,0 +1,6 @@
+#find all file paths that have been executed and have 'output.log'
+find ./ -name output.log -printf '%h\n' > out_file
+#find all file paths that have DALTON.dal (execution file for calc.)
+find ./ -name DALTON.dal -printf '%h\n' > DAL_file
+#sort and find difference of all calculation folders without 'output.log'
+diff <(sort DAL_file) <(sort out_file) > list_exec

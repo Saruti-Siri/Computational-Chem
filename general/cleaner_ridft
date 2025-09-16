@@ -1,0 +1,20 @@
+#exec in ridft folder
+mkdir temp
+mkdir old
+mv control cleaner* input_DFT_turbo.txt control-template mol-Dalton2xyz sub-turbomole-7.6.slurm temp/
+mv coord basis auxbasis point_charge point_bohr energy mos control ridft.log old
+rm *
+mv temp/* .
+rm -r temp
+cp ~/important_scripts/scripts/get_redis .
+cp ../../PE/frag_no-front/dscf/MOLECULE.mol .
+cp ../../PE/frag_no-front/dscf/POTENTIAL.pot .
+mv control control-template
+
+./mol-Dalton2xyz
+x2t MOLECULE.xyz > coord
+define < input_DFT_turbo.txt
+cp control-template control
+sed -i '/orbital_max/,/debye/d' control
+cp ../../PE/frag_no-front/dscf/output.log .
+./get_redis

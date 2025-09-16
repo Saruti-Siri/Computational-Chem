@@ -1,0 +1,21 @@
+
+#find ./ -maxdepth 2 -type d
+
+while IFS= read line;
+do
+        echo "$line" | for l in $line
+                do
+                        cd "$l" && mkdir DFT && cd DFT && mkdir MN15 M11 BH CAM &&
+                        cp ~/important_scripts/scripts/input_DFT_turbo.txt . ;
+                        done
+done < list
+
+while IFS= read line;
+do
+        echo "$line" | for l in $line
+                do
+                        cd "$l"/DFT/ && find ../ -name MOLECULE.mol > kek && mol=$(head -n1 kek) &&
+                        cp "$mol" . && cp ~/important_scripts/scripts/mol-Dalton2xyz . && ./mol-Dalton2xyz;
+                        done
+done < list
+

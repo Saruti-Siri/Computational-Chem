@@ -1,0 +1,91 @@
+#grep -A 1 " linear parallel" escf.log > raw_tpa
+grep -A 10 "Osc.(len)" ../s9/escf.log > raw_osci
+grep -A 6 "Electric dipole moment:" escf.log > raw_dip_ground
+grep -A 4 "dipole moment (length rep.)" ../s9/escf.log > raw_tdm
+
+sed -i 1d delta_raw
+awk '{print $15}' raw_osci > OPA.txt
+sed -i 1,2d OPA.txt
+awk '{print $4}' raw_dip_ground > raw_dip_xyz
+sed -i 1,4d raw_dip_xyz
+pcregrep -A 3 -M 'dipole moment.*\n.-' ../dpm/s1/egrad.log > raw1
+tail -n 3 raw1 > raw_dip
+pcregrep -A 3 -M 'dipole moment.*\n.-' ../dpm/s2/egrad.log > raw1
+tail -n 3 raw1 >> raw_dip
+pcregrep -A 3 -M 'dipole moment.*\n.-' ../dpm/s3/egrad.log > raw1
+tail -n 3 raw1 >> raw_dip
+pcregrep -A 3 -M 'dipole moment.*\n.-' ../dpm/s4/egrad.log > raw1
+tail -n 3 raw1 >> raw_dip
+pcregrep -A 3 -M 'dipole moment.*\n.-' ../dpm/s5/egrad.log > raw1
+tail -n 3 raw1 >> raw_dip
+pcregrep -A 3 -M 'dipole moment.*\n.-' ../dpm/s6/egrad.log > raw1
+tail -n 3 raw1 >> raw_dip
+pcregrep -A 3 -M 'dipole moment.*\n.-' ../dpm/s7/egrad.log > raw1
+tail -n 3 raw1 >> raw_dip
+pcregrep -A 3 -M 'dipole moment.*\n.-' ../dpm/s8/egrad.log > raw1
+tail -n 3 raw1 >> raw_dip
+pcregrep -A 3 -M 'dipole moment.*\n.-' ../dpm/s9/egrad.log > raw1
+tail -n 3 raw1 >> raw_dip
+
+awk '{print $6}' raw_dip >> raw_dip_xyz
+awk 'ORS=NR%3?FS:RS' raw_dip_xyz > dip_xyz
+#awk '{print $2}' raw_tdm > raw_dipxyz_es
+#sed -i -e s/transition// raw_dipxyz_es
+#sed '/^[[:space:]]*$/d' raw_dipxyz_es >> raw_dip_xyz
+
+grep debye raw_tdm > raw_tdm2 
+awk '{print $6}' raw_tdm2 > TDM
+awk '{print $8}' raw_dip_ground > dip_debye
+
+grep '| dipole moment |' ../dpm/s1/egrad.log > raw_dip_es 
+grep '| dipole moment |' ../dpm/s2/egrad.log >> raw_dip_es
+grep '| dipole moment |' ../dpm/s3/egrad.log >> raw_dip_es
+grep '| dipole moment |' ../dpm/s4/egrad.log >> raw_dip_es
+grep '| dipole moment |' ../dpm/s5/egrad.log >> raw_dip_es
+grep '| dipole moment |' ../dpm/s6/egrad.log >> raw_dip_es
+grep '| dipole moment |' ../dpm/s7/egrad.log >> raw_dip_es
+grep '| dipole moment |' ../dpm/s8/egrad.log >> raw_dip_es
+grep '| dipole moment |' ../dpm/s9/egrad.log >> raw_dip_es
+awk '{print $9}' raw_dip_es >> dip_debye
+sed -i '/^[[:space:]]*$/d' dip_debye
+
+grep 'Exc. energy' escf.log > ee_raw
+grep 'Exc. energy' ../s2/escf.log >> ee_raw
+grep 'Exc. energy' ../s3/escf.log >> ee_raw
+grep 'Exc. energy' ../s4/escf.log >> ee_raw
+grep 'Exc. energy' ../s5/escf.log >> ee_raw
+grep 'Exc. energy' ../s6/escf.log >> ee_raw
+grep 'Exc. energy' ../s7/escf.log >> ee_raw
+grep 'Exc. energy' ../s8/escf.log >> ee_raw
+grep 'Exc. energy' ../s9/escf.log >> ee_raw
+grep '    transition strength ' escf.log > delta_raw
+grep '    transition strength ' ../s2/escf.log >> delta_raw
+grep '    transition strength ' ../s3/escf.log >> delta_raw
+grep '    transition strength ' ../s4/escf.log >> delta_raw
+grep '    transition strength ' ../s5/escf.log >> delta_raw
+grep '    transition strength ' ../s6/escf.log >> delta_raw
+grep '    transition strength ' ../s7/escf.log >> delta_raw
+grep '    transition strength ' ../s8/escf.log >> delta_raw
+grep '    transition strength ' ../s9/escf.log >> delta_raw
+
+
+awk '{print $5}' ee_raw > EE
+awk '{print $4}' delta_raw > delt_raw
+paste EE delt_raw > delta_raw2
+sed 's/*/0/g' delta_raw2 > delta_tpa
+
+#add DPM part
+#awk 'ORS=(NR%3==0)?"\n":" "' raw_dip_xyz > xyz_dip
+awk '{print $1}'  dip_xyz > x_dpm
+awk '{print $2}'  dip_xyz > y_dpm
+awk '{print $3}'  dip_xyz > z_dpm
+awk 'NR==1{D=$0}{$0=($0-D); print}' x_dpm > x2
+awk 'NR==1{D=$0}{$0=($0-D); print}' y_dpm > y2
+awk 'NR==1{D=$0}{$0=($0-D); print}' z_dpm > z2
+awk 'NR==1{D=$0}{$0=($0-D); print}' dip_debye > DPM.st.swp
+sed 's/-//g' < DPM.st.swp > DPM.st
+paste x2 y2 z2 > dpm.txt
+python skrypt-DPM.py > dpm.sf2
+awk '{print $1/0.3934303}' dpm.sf2 > DPM.sf
+
+rm *raw* *_dpm *2 *swp 

@@ -1,0 +1,11 @@
+tail -n +3 $1 > temp
+
+awk {'print $1'} temp > atom
+awk {'print ($2*0.529177)'} temp > tempx
+awk {'print ($3*0.529177)'} temp > tempx2
+awk {'print ($4*0.529177)'} temp > tempx3
+#cut -d"&" -f2- < $1 > temp2
+#sed -i "s/$/\ \&/" temp
+head -n 2 $1 > ${1%.*}_ang.xyz
+paste atom tempx tempx2 tempx3 >> ${1%.*}_ang.xyz
+rm temp* atom

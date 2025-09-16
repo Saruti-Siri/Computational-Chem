@@ -1,0 +1,19 @@
+awk 'function abs(x) {return x>0?x:-x} NR==1{D=$0}{$0=($0-D); print}' DPM.txt > DPM.txt2
+sed 's/-//g' < DPM.txt2 > DPM_st
+
+#tr -d '-' < dpm.txt > dpm_pos.txt
+#sed 's/e/e-/' dpm_pos.txt > dpm.txt
+
+awk '{ print $1 }' dpm.txt > x_dpm
+awk '{ print $2 }' dpm.txt > y_dpm
+awk '{ print $3 }' dpm.txt > z_dpm
+
+awk 'function abs(x) {return x>0?x:-x} NR==1{D=$0}{$0=($0-D); print}' x_dpm > x2
+
+awk 'function abs(x) {return x>0?x:-x} NR==1{D=$0}{$0=($0-D); print}' y_dpm > y2
+
+awk 'function abs(x) {return x>0?x:-x} NR==1{D=$0}{$0=($0-D); print}' z_dpm > z2
+
+paste x2 y2 z2 > dpm_sf1
+rm *2 *_dpm dpm_pos.txt 
+#rm dpm.txt

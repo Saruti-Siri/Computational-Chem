@@ -1,0 +1,5 @@
+./get-cc_symmetry.bash
+./skrypt* 4 0.1 > TPA+OPA
+./symmetry*
+cat data_org
+grep "wall time used in DALTON" output.log

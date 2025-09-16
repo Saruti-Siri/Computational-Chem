@@ -1,0 +1,35 @@
+grep "Linear" ricc2.log > raw_tpa
+grep oscillator ricc2.log > raw_osci
+grep -A 5 "dipole moment:" ricc2.log > raw_dip_xyz
+grep "| dipole moment |" ricc2.log > raw_dipout
+
+awk '{print $3}' raw_tpa > delta_raw
+awk '{print $6}' raw_osci > OPA.txt
+grep -E 'x|y|z' raw_dip_xyz > xyz_dip
+awk '{print $6}' raw_dipout > dip_au
+awk '{print $9}' raw_dipout > dip_debye
+grep frequency ricc2.log > ee_raw
+head -n 6 ee_raw > ee_raw2
+awk '{print $6}' ee_raw2 > EE
+paste EE delta_raw > delta_raw2
+sed 's/*/0/g' delta_raw2 > delta_tpa
+
+grep x xyz_dip > x_dip
+grep y xyz_dip > y_dip
+grep z xyz_dip > z_dip
+paste x_dip y_dip z_dip > xyz_comb_raw
+awk '{print $2 "  " $4 "  " $6 "  "}' xyz_comb_raw > xyz_comb
+awk '{print $2}' xyz_comb_raw > x_dpm
+awk '{print $4}' xyz_comb_raw > y_dpm
+awk '{print $6}' xyz_comb_raw > z_dpm
+awk 'NR==1{D=$0}{$0=($0-D); print}' x_dpm > x2
+awk 'NR==1{D=$0}{$0=($0-D); print}' y_dpm > y2
+awk 'NR==1{D=$0}{$0=($0-D); print}' z_dpm > z2
+awk 'NR==1{D=$0}{$0=($0-D); print}' dip_debye > DPM.st.swp
+sed 's/-//g' < DPM.st.swp > DPM.st
+paste x2 y2 z2 > dpm.txt
+python skrypt-DPM.py > dpm2.sf 
+awk '{print $1/0.3934303}' dpm2.sf > DPM.sf
+
+rm x2 y2 z2 dpm.sf dpm2.sf
+rm *raw* *_dip EE *swp *_dpm

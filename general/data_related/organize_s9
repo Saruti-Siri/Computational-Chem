@@ -1,0 +1,18 @@
+#cp ~/important_scripts/scripts/get_TPA-multi_turbo .
+#cp ~/important_scripts/scripts/evtonm.bash .
+#cp ~/important_scripts/scripts/skrypt-sTPA-turbo.py .
+#cp ~/important_scripts/scripts/dpm-cc_scripts/skrypt-DPM.py .
+
+./get_s9
+./skrypt-sTPA-turbo.py 4 0.1 > TPA+OPA
+./evtonm.bash EE
+awk '{print $3}' TPA+OPA > sTPA
+tail -n +2 dip_debye > dip_es
+head -n 1 dip_debye > dip_gs
+tail -n +2 DPM.sf > sf
+awk '{print $2}' delta_tpa > dTPA
+
+paste EE NM dTPA sTPA OPA.txt TDM dip_es sf dip_gs > kek
+mv kek data_total
+rm sf dip_gs dip_es sTPA
+cat data_total

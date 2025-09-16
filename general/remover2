@@ -1,0 +1,17 @@
+#mkdir old
+#cp s1/escf.log old/escf-1.log
+#cp s2/escf.log old/escf-2.log
+#cp s3/escf.log old/escf-3.log
+#cp s4/escf.log old/escf-4.log
+#cp s5/escf.log old/escf-5.log
+#cp s6/escf.log old/escf-6.log
+#while IFS= read line;
+#do
+#        echo "$line" | for l in $line
+#                do
+#                        cd "$l" && rm * ;
+#                        done
+#done < list
+
+shopt -s extglob
+rm -v !("DALTON.dal"|"remover")

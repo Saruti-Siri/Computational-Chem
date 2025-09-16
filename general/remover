@@ -1,0 +1,9 @@
+find ./ -name "DALTON.e*" -delete
+find ./ -name "DALTON.o*" -delete
+find ./ -name "DALTON_*" -delete
+find ./ -name "MOLECULE.*" -delete
+find ./ -name "*.mol" -delete
+find ./ -name "*.xyz" -delete
+find ./ -name "output.log" -delete
+find ./ -name "*.data" -delete
+find ./ -name "data.txt" -delete
