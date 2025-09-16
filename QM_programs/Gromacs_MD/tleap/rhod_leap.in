@@ -1,0 +1,15 @@
+source leaprc.ff94
+source leaprc.gaff2
+source leaprc.water.tip3p
+
+ligA = loadmol2 LigandA.mol2
+ligB = loadmol2 LigandB.mol2
+ligC = loadmol2 LigandC.mol2
+
+loadamberparams LigandA.frcmod
+loadamberparams LigandB.frcmod
+loadamberparams LigandC.frcmod
+
+
+protein = loadPDB Protein.pdb
+complex = combine {protein ligA ligB ligC}

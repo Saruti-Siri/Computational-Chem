@@ -1,0 +1,45 @@
+;
+;	File 'a-ARM_Rh_GLH-181_CASTp_18273_Ion_chain_A2.itp' was generated
+;	By user: onbekend (0)
+;	On host: onbekend
+;	At date: Thu Jun 21 16:02:38 2018
+;
+;	This is a include topology file
+;
+;	It was generated using program:
+;	pdb2gmx - VERSION 4.5.5
+;
+;	Command line was:
+;	/usr/local/gromacs/bin/pdb2gmx -f a-ARM_Rh_GLH-181_CASTp_18273.pdb -o a-ARM_Rh_GLH-181_CASTp_18273.gro -p a-ARM_Rh_GLH-181_CASTp_18273.top -ff amber94 -water tip3p 
+;
+;	Force field was read from current directory or a relative path - path added.
+;
+
+[ moleculetype ]
+; Name            nrexcl
+Ion_chain_A2        3
+
+[ atoms ]
+;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB      massB
+; residue  38 CL  rtp CL   q -1.0
+     1         Cl     38     CL     CL      1         -1      35.45   ; qtot -1
+; residue  39 CL  rtp CL   q -1.0
+     2         Cl     39     CL     CL      2         -1      35.45   ; qtot -2
+; residue  40 CL  rtp CL   q -1.0
+     3         Cl     40     CL     CL      3         -1      35.45   ; qtot -3
+; residue  41 CL  rtp CL   q -1.0
+     4         Cl     41     CL     CL      4         -1      35.45   ; qtot -4
+; residue  42 CL  rtp CL   q -1.0
+     5         Cl     42     CL     CL      5         -1      35.45   ; qtot -5
+; residue  43 CL  rtp CL   q -1.0
+     6         Cl     43     CL     CL      6         -1      35.45   ; qtot -6
+; residue  44 NA  rtp NA   q +1.0
+     7         Na     44     NA     NA      7          1      22.99   ; qtot -5
+; residue  45 NA  rtp NA   q +1.0
+     8         Na     45     NA     NA      8          1      22.99   ; qtot -4
+
+; Include Position restraint file
+#ifdef POSRES
+#include "posre_Ion_chain_A2.itp"
+#endif
+

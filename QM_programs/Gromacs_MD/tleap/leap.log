@@ -1,0 +1,1872 @@
+log started: Fri Aug  6 11:44:34 2021
+
+Log file: ./leap.log
+>> #
+>> # ----- leaprc for loading the Cornell et al. 1994 force field.
+>> #       assumes that any unspecified nucleic acids are DNA 
+>> #
+>> #	load atom type hybridizations
+>> #
+>> addAtomTypes {
+>> 	{ "H"   "H" "sp3" }
+>> 	{ "HO"  "H" "sp3" }
+>> 	{ "HS"  "H" "sp3" }
+>> 	{ "H1"  "H" "sp3" }
+>> 	{ "H2"  "H" "sp3" }
+>> 	{ "H3"  "H" "sp3" }
+>> 	{ "H4"  "H" "sp3" }
+>> 	{ "H5"  "H" "sp3" }
+>> 	{ "HW"  "H" "sp3" }
+>> 	{ "HC"  "H" "sp3" }
+>> 	{ "HA"  "H" "sp3" }
+>> 	{ "HP"  "H" "sp3" }
+>> 	{ "OH"  "O" "sp3" }
+>> 	{ "OS"  "O" "sp3" }
+>> 	{ "O"   "O" "sp2" }
+>> 	{ "O2"  "O" "sp2" }
+>> 	{ "OW"  "O" "sp3" }
+>> 	{ "CT"  "C" "sp3" }
+>> 	{ "CH"  "C" "sp3" }
+>> 	{ "C2"  "C" "sp3" }
+>> 	{ "C3"  "C" "sp3" }
+>> 	{ "C"   "C" "sp2" }
+>> 	{ "C*"  "C" "sp2" }
+>> 	{ "CA"  "C" "sp2" }
+>> 	{ "CB"  "C" "sp2" }
+>> 	{ "CC"  "C" "sp2" }
+>> 	{ "CN"  "C" "sp2" }
+>> 	{ "CM"  "C" "sp2" }
+>> 	{ "CK"  "C" "sp2" }
+>> 	{ "CQ"  "C" "sp2" }
+>> 	{ "CD"  "C" "sp2" }
+>> 	{ "CE"  "C" "sp2" }
+>> 	{ "CF"  "C" "sp2" }
+>> 	{ "CG"  "C" "sp2" }
+>> 	{ "CP"  "C" "sp2" }
+>> 	{ "CI"  "C" "sp2" }
+>> 	{ "CJ"  "C" "sp2" }
+>> 	{ "CW"  "C" "sp2" }
+>> 	{ "CV"  "C" "sp2" }
+>> 	{ "CR"  "C" "sp2" }
+>> 	{ "CA"  "C" "sp2" }
+>> 	{ "CY"  "C" "sp2" }
+>> 	{ "C0"  "C" "sp2" }
+>> 	{ "MG"  "Mg" "sp3" }
+>> 	{ "N"   "N" "sp2" }
+>> 	{ "NA"  "N" "sp2" }
+>> 	{ "N2"  "N" "sp2" }
+>> 	{ "N*"  "N" "sp2" }
+>> 	{ "NP"  "N" "sp2" }
+>> 	{ "NQ"  "N" "sp2" }
+>> 	{ "NB"  "N" "sp2" }
+>> 	{ "NC"  "N" "sp2" }
+>> 	{ "NT"  "N" "sp3" }
+>> 	{ "N3"  "N" "sp3" }
+>> 	{ "S"   "S" "sp3" }
+>> 	{ "SH"  "S" "sp3" }
+>> 	{ "P"   "P" "sp3" }
+>> 	{ "LP"  ""  "sp3" }
+>> 	{ "F"   "F" "sp3" }
+>> 	{ "CL"  "Cl" "sp3" }
+>> 	{ "BR"  "Br" "sp3" }
+>> 	{ "I"   "I"  "sp3" }
+>> 	{ "FE"  "Fe" "sp3" }
+>>     { "EP"  ""  "sp3" }
+>> # glycam
+>> 	{ "OG"  "O" "sp3" }
+>> 	{ "OL"  "O" "sp3" }
+>> 	{ "AC"  "C" "sp3" }
+>> 	{ "EC"  "C" "sp3" }
+>> }
+>> #
+>> #	Load the main parameter set.
+>> #
+>> parm94 = loadamberparams parm94.dat
+Loading parameters: /usr/local/amber/gcc4.9.2/tools18/dat/leap/parm/parm94.dat
+Reading title:
+PARM94 for DNA, RNA and proteins with TIP3P Water. USE SCEE=1.2 in energy progs
+(UNKNOWN ATOM TYPE: IM)
+(UNKNOWN ATOM TYPE: Li)
+(UNKNOWN ATOM TYPE: IP)
+(UNKNOWN ATOM TYPE: K)
+(UNKNOWN ATOM TYPE: Rb)
+(UNKNOWN ATOM TYPE: Cs)
+(UNKNOWN ATOM TYPE: IB)
+(UNKNOWN ATOM TYPE: EP)
+>> #
+>> #	Load DNA/RNA libraries
+>> #
+>> loadOff all_nucleic94.lib
+Loading library: /usr/local/amber/gcc4.9.2/tools18/dat/leap/lib/all_nucleic94.lib
+Loading: DA
+Loading: DA3
+Loading: DA5
+Loading: DAN
+Loading: DC
+Loading: DC3
+Loading: DC5
+Loading: DCN
+Loading: DG
+Loading: DG3
+Loading: DG5
+Loading: DGN
+Loading: DT
+Loading: DT3
+Loading: DT5
+Loading: DTN
+Loading: RA
+Loading: RA3
+Loading: RA5
+Loading: RAN
+Loading: RC
+Loading: RC3
+Loading: RC5
+Loading: RCN
+Loading: RG
+Loading: RG3
+Loading: RG5
+Loading: RGN
+Loading: RU
+Loading: RU3
+Loading: RU5
+Loading: RUN
+>> #
+>> #	Load main chain and terminating 
+>> #	amino acid libraries.
+>> #
+>> loadOff all_amino94.lib
+Loading library: ./all_amino94.lib
+Loading: ALA
+Loading: ARG
+Loading: ASH
+Loading: ASN
+Loading: ASP
+Loading: CYM
+Loading: CYS
+Loading: CYX
+Loading: GLH
+Loading: GLN
+Loading: GLU
+Loading: GLY
+Loading: HID
+Loading: HIE
+Loading: HIP
+Loading: ILE
+Loading: LEU
+Loading: LYN
+Loading: LYS
+Loading: MET
+Loading: PHE
+Loading: PRO
+Loading: SER
+Loading: THR
+Loading: TRP
+Loading: TYR
+Loading: VAL
+>> loadOff all_aminoct94.lib
+Loading library: ./all_aminoct94.lib
+Loading: CALA
+Loading: CARG
+Loading: CASN
+Loading: CASP
+Loading: CCYS
+Loading: CCYX
+Loading: CGLN
+Loading: CGLU
+Loading: CGLY
+Loading: CHID
+Loading: CHIE
+Loading: CHIP
+Loading: CILE
+Loading: CLEU
+Loading: CLYS
+Loading: CMET
+Loading: CPHE
+Loading: CPRO
+Loading: CSER
+Loading: CTHR
+Loading: CTRP
+Loading: CTYR
+Loading: CVAL
+Loading: NHE
+Loading: NME
+>> loadOff all_aminont94.lib
+Loading library: ./all_aminont94.lib
+Loading: ACE
+Loading: NALA
+Loading: NARG
+Loading: NASN
+Loading: NASP
+Loading: NCYS
+Loading: NCYX
+Loading: NGLN
+Loading: NGLU
+Loading: NGLY
+Loading: NHID
+Loading: NHIE
+Loading: NHIP
+Loading: NILE
+Loading: NLEU
+Loading: NLYS
+Loading: NMET
+Loading: NPHE
+Loading: NPRO
+Loading: NSER
+Loading: NTHR
+Loading: NTRP
+Loading: NTYR
+Loading: NVAL
+>> 
+>> loadOff ions94.lib
+Loading library: /usr/local/amber/gcc4.9.2/tools18/dat/leap/lib/ions94.lib
+Loading: CIO
+Loading: Cl-
+Loading: Cs+
+Loading: IB
+Loading: K+
+Loading: Li+
+Loading: MG2
+Loading: Na+
+Loading: Rb+
+>> loadOff solvents.lib
+Loading library: /usr/local/amber/gcc4.9.2/tools18/dat/leap/lib/solvents.lib
+Loading: CHCL3BOX
+Loading: DC4
+Loading: FB3
+Loading: FB3BOX
+Loading: FB4
+Loading: FB4BOX
+Loading: MEOHBOX
+Loading: NMABOX
+Loading: OP3
+Loading: OPC
+Loading: OPC3BOX
+Loading: OPCBOX
+Loading: PL3
+Loading: POL3BOX
+Loading: QSPCFWBOX
+Loading: SPC
+Loading: SPCBOX
+Loading: SPCFWBOX
+Loading: SPF
+Loading: SPG
+Loading: T4E
+Loading: TIP3PBOX
+Loading: TIP3PFBOX
+Loading: TIP4PBOX
+Loading: TIP4PEWBOX
+Loading: TIP5PBOX
+Loading: TP3
+Loading: TP4
+Loading: TP5
+Loading: TPF
+>> HOH = TP3
+>> WAT = TP3
+>> 
+>> #
+>> #	Define the PDB name map for the amino acids and DNA.
+>> #
+>> addPdbResMap {
+>>   { 0 "ALA" "NALA" } { 1 "ALA" "CALA" }
+>>   { 0 "ARG" "NARG" } { 1 "ARG" "CARG" }
+>>   { 0 "ASN" "NASN" } { 1 "ASN" "CASN" }
+>>   { 0 "ASP" "NASP" } { 1 "ASP" "CASP" }
+>>   { 0 "CYS" "NCYS" } { 1 "CYS" "CCYS" }
+>>   { 0 "CYX" "NCYX" } { 1 "CYX" "CCYX" }
+>>   { 0 "GLN" "NGLN" } { 1 "GLN" "CGLN" }
+>>   { 0 "GLU" "NGLU" } { 1 "GLU" "CGLU" }
+>>   { 0 "GLY" "NGLY" } { 1 "GLY" "CGLY" }
+>>   { 0 "HID" "NHID" } { 1 "HID" "CHID" }
+>>   { 0 "HIE" "NHIE" } { 1 "HIE" "CHIE" }
+>>   { 0 "HIP" "NHIP" } { 1 "HIP" "CHIP" }
+>>   { 0 "ILE" "NILE" } { 1 "ILE" "CILE" }
+>>   { 0 "LEU" "NLEU" } { 1 "LEU" "CLEU" }
+>>   { 0 "LYS" "NLYS" } { 1 "LYS" "CLYS" }
+>>   { 0 "MET" "NMET" } { 1 "MET" "CMET" }
+>>   { 0 "PHE" "NPHE" } { 1 "PHE" "CPHE" }
+>>   { 0 "PRO" "NPRO" } { 1 "PRO" "CPRO" }
+>>   { 0 "SER" "NSER" } { 1 "SER" "CSER" }
+>>   { 0 "THR" "NTHR" } { 1 "THR" "CTHR" }
+>>   { 0 "TRP" "NTRP" } { 1 "TRP" "CTRP" }
+>>   { 0 "TYR" "NTYR" } { 1 "TYR" "CTYR" }
+>>   { 0 "VAL" "NVAL" } { 1 "VAL" "CVAL" }
+>>   { 0 "HIS" "NHIS" } { 1 "HIS" "CHIS" }
+>>   { 0 "GUA" "DG5"  } { 1 "GUA" "DG3"  } { "GUA" "DG" }
+>>   { 0 "ADE" "DA5"  } { 1 "ADE" "DA3"  } { "ADE" "DA" }
+>>   { 0 "CYT" "DC5"  } { 1 "CYT" "DC3"  } { "CYT" "DC" }
+>>   { 0 "THY" "DT5"  } { 1 "THY" "DT3"  } { "THY" "DT" }
+>>   { 0 "G" "DG5"  } { 1 "G" "DG3"  } { "G" "DG" } { "GN" "DGN" }
+>>   { 0 "A" "DA5"  } { 1 "A" "DA3"  } { "A" "DA" } { "AN" "DAN" }
+>>   { 0 "C" "DC5"  } { 1 "C" "DC3"  } { "C" "DC" } { "CN" "DCN" }
+>>   { 0 "T" "DT5"  } { 1 "T" "DT3"  } { "T" "DT" } { "TN" "DTN" }
+>>   { 0 "C5" "DC5" }
+>>   { 0 "G5" "DG5" }
+>>   { 0 "A5" "DA5" }
+>>   { 0 "T5" "DT5" }
+>>   { 1 "C3" "DC3" }
+>>   { 1 "G3" "DG3" }
+>>   { 1 "A3" "DA3" }
+>>   { 1 "T3" "DT3" }
+>> 
+>> }
+>> 
+>> addPdbAtomMap {
+>>   { "O5*" "O5'" }
+>>   { "C5*" "C5'" }
+>>   { "C4*" "C4'" }
+>>   { "O4*" "O4'" }
+>>   { "C3*" "C3'" }
+>>   { "O3*" "O3'" }
+>>   { "C2*" "C2'" }
+>>   { "C1*" "C1'" }
+>>   { "C5M" "C7"  }
+>>   { "H5M1" "H71"  }
+>>   { "H5M2" "H72"  }
+>>   { "H5M3" "H73"  }
+>>   { "H1*" "H1'" }
+>>   { "H2*1" "H2'1" }
+>>   { "H2*2" "H2'2" }
+>>   { "H3*" "H3'" }
+>>   { "H4*" "H4'" }
+>>   { "H5*1" "H5'1" }
+>>   { "H5*2" "H5'2" }
+>> # old ff atom names -> new
+>>   { "O1'" "O4'" }
+>>   { "OA"  "O1P" }
+>>   { "OB"  "O2P" }
+>> }
+>> 
+>> 
+>> #
+>> # assumed that most often proteins use HIE
+>> #
+>> NHIS = NHIE
+>> HIS = HIE
+>> CHIS = CHIE
+> 
+> source leaprc.water.tip3p
+----- Source: /usr/local/amber/gcc4.9.2/tools18/dat/leap/cmd/leaprc.water.tip3p
+----- Source of /usr/local/amber/gcc4.9.2/tools18/dat/leap/cmd/leaprc.water.tip3p done
+>> #
+>> #       Load water and ions for TIP3P + Joung-Chetham monovalent ions
+>> #       + Li/Merz highly charged ions (+2 to +4, 12-6 normal usage set)
+>> #
+>> addAtomTypes {
+>> 	{ "HW"  "H" "sp3" }
+>> 	{ "OW"  "O" "sp3" }
+>> 	{ "F-"   "F" "sp3" }
+>> 	{ "Cl-"  "Cl" "sp3" }
+>> 	{ "Br-"  "Br" "sp3" }
+>> 	{ "I-"   "I"  "sp3" }
+>> 	{ "Li+"  "Li"  "sp3" }
+>> 	{ "Na+"  "Na"  "sp3" }
+>> 	{ "K+"  "K"  "sp3" }
+>> 	{ "Rb+"  "Rb"  "sp3" }
+>> 	{ "Cs+"  "Cs"  "sp3" }
+>> 	{ "Mg+"  "Mg"  "sp3" }
+>>     { "Tl+"  "Tl"  "sp3" }
+>>     { "Cu+"  "Cu"  "sp3" }
+>>     { "Ag+"  "Ag"  "sp3" }
+>>     { "Be2+" "Be"  "sp3" }
+>>     { "Cu2+" "Cu"  "sp3" }
+>>     { "Ni2+" "Ni"  "sp3" }
+>>     { "Pt2+" "Pt"  "sp3" }
+>>     { "Zn2+" "Zn"  "sp3" }
+>>     { "Co2+" "Co"  "sp3" }
+>>     { "Pd2+" "Pd"  "sp3" }
+>>     { "Ag2+" "Ag"  "sp3" }
+>>     { "Cr2+" "Cr"  "sp3" }
+>>     { "Fe2+" "Fe"  "sp3" }
+>>     { "Mg2+" "Mg"  "sp3" }
+>>     { "V2+"  "V"   "sp3" }
+>>     { "Mn2+" "Mn"  "sp3" }
+>>     { "Hg2+" "Hg"  "sp3" }
+>>     { "Cd2+" "Cd"  "sp3" }
+>>     { "Yb2+" "Yb"  "sp3" }
+>>     { "Ca2+" "Ca"  "sp3" }
+>>     { "Sn2+" "Sn"  "sp3" }
+>>     { "Pb2+" "Pb"  "sp3" }
+>>     { "Eu2+" "Eu"  "sp3" }
+>>     { "Sr2+" "Sr"  "sp3" }
+>>     { "Sm2+" "Sm"  "sp3" }
+>>     { "Ba2+" "Ba"  "sp3" }
+>>     { "Ra2+" "Ra"  "sp3" }
+>>     { "Al3+" "Al"  "sp3" }
+>>     { "Fe3+" "Fe"  "sp3" }
+>>     { "Cr3+" "Cr"  "sp3" }
+>>     { "In3+" "In"  "sp3" }
+>>     { "Tl3+" "Tl"  "sp3" }
+>>     { "Y3+"  "Y"   "sp3" }
+>>     { "La3+" "La"  "sp3" }
+>>     { "Ce3+" "Ce"  "sp3" }
+>>     { "Pr3+" "Pr"  "sp3" }
+>>     { "Nd3+" "Nd"  "sp3" }
+>>     { "Sm3+" "Sm"  "sp3" }
+>>     { "Eu3+" "Eu"  "sp3" }
+>>     { "Gd3+" "Gd"  "sp3" }
+>>     { "Tb3+" "Tb"  "sp3" }
+>>     { "Dy3+" "Dy"  "sp3" }
+>>     { "Er3+" "Er"  "sp3" }
+>>     { "Tm3+" "Tm"  "sp3" }
+>>     { "Lu3+" "Lu"  "sp3" }
+>>     { "Hf4+" "Hf"  "sp3" }
+>>     { "Zr4+" "Zr"  "sp3" }
+>>     { "Ce4+" "Ce"  "sp3" }
+>>     { "U4+"  "U"   "sp3" }
+>>     { "Pu4+" "Pu"  "sp3" }
+>>     { "Th4+" "Th"  "sp3" }
+>> }
+>> loadOff atomic_ions.lib
+Loading library: /usr/local/amber/gcc4.9.2/tools18/dat/leap/lib/atomic_ions.lib
+Loading: AG
+Loading: AL
+Loading: Ag
+Loading: BA
+Loading: BR
+Loading: Be
+Loading: CA
+Loading: CD
+Loading: CE
+Loading: CL
+Loading: CO
+Loading: CR
+Loading: CS
+Loading: CU
+Loading: CU1
+Loading: Ce
+Loading: Cl-
+Loading: Cr
+Loading: Dy
+Loading: EU
+Loading: EU3
+Loading: Er
+Loading: F
+Loading: FE
+Loading: FE2
+Loading: GD3
+Loading: H3O+
+Loading: HE+
+Loading: HG
+Loading: HZ+
+Loading: Hf
+Loading: IN
+Loading: IOD
+Loading: K
+Loading: K+
+Loading: LA
+Loading: LI
+Loading: LU
+Loading: MG
+Loading: MN
+Loading: NA
+Loading: NH4
+Loading: NI
+Loading: Na+
+Loading: Nd
+Loading: PB
+Loading: PD
+Loading: PR
+Loading: PT
+Loading: Pu
+Loading: RB
+Loading: Ra
+Loading: SM
+Loading: SR
+Loading: Sm
+Loading: Sn
+Loading: TB
+Loading: TL
+Loading: Th
+Loading: Tl
+Loading: Tm
+Loading: U4+
+Loading: V2+
+Loading: Y
+Loading: YB2
+Loading: ZN
+Loading: Zr
+>> loadOff solvents.lib
+Loading library: /usr/local/amber/gcc4.9.2/tools18/dat/leap/lib/solvents.lib
+Loading: CHCL3BOX
+Loading: DC4
+Loading: FB3
+Loading: FB3BOX
+Loading: FB4
+Loading: FB4BOX
+Loading: MEOHBOX
+Loading: NMABOX
+Loading: OP3
+Loading: OPC
+Loading: OPC3BOX
+Loading: OPCBOX
+Loading: PL3
+Loading: POL3BOX
+Loading: QSPCFWBOX
+Loading: SPC
+Loading: SPCBOX
+Loading: SPCFWBOX
+Loading: SPF
+Loading: SPG
+Loading: T4E
+Loading: TIP3PBOX
+Loading: TIP3PFBOX
+Loading: TIP4PBOX
+Loading: TIP4PEWBOX
+Loading: TIP5PBOX
+Loading: TP3
+Loading: TP4
+Loading: TP5
+Loading: TPF
+>> HOH = TP3
+>> WAT = TP3
+>> loadAmberParams frcmod.tip3p
+Loading parameters: /usr/local/amber/gcc4.9.2/tools18/dat/leap/parm/frcmod.tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+This is the additional/replacement parameter set for TIP3P water
+>> loadAmberParams frcmod.ionsjc_tip3p
+Loading parameters: /usr/local/amber/gcc4.9.2/tools18/dat/leap/parm/frcmod.ionsjc_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Monovalent ion parameters for Ewald and TIP3P water from Joung & Cheatham JPCB (2008)
+>> loadAmberParams frcmod.ions234lm_126_tip3p
+Loading parameters: /usr/local/amber/gcc4.9.2/tools18/dat/leap/parm/frcmod.ions234lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of divalent to tetravalent ions for TIP3P water model (12-6 normal usage set)
+>> 
+> 
+> loadamberparams rhod.top
+Loading parameters: ./rhod.top
+Reading title:
+%VERSION  VERSION_STAMP = V0001.000  DATE = 07/09/21  14:29:05
+
+Warning: %FLAG: mass not read - omitting
+
+Warning: %FORMAT(20a4): mass not read - omitting
+
+Warning: Incomplete Improper Torsion line:
+%FLAG HBCUT
+> system = loadpdb rhod_new.pdb
+Loading PDB file: ./rhod_new.pdb
+Matching PDB residue names to LEaP variables.
+Mapped residue MET, term: Terminal/beginning, seq. number: 0 to: NMET.
+Mapped residue ALA, term: Terminal/last, seq. number: 294 to: CALA.
+
+Warning: Unknown residue: RET   number: 295   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+Mapped residue THR, term: Terminal/beginning, seq. number: 296 to: NTHR.
+Mapped residue ALA, term: Terminal/last, seq. number: 347 to: CALA.
+
+Warning: Unknown residue: Cl   number: 348   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: Cl   number: 349   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: Cl   number: 350   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: Cl   number: 351   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: Cl   number: 352   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: Cl   number: 353   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: Na   number: 354   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: Na   number: 355   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 356   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 357   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 358   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 359   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 360   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 361   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 362   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 363   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 364   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 365   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 366   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 367   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 368   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 369   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+
+Warning: Unknown residue: AT   number: 370   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+Warning:   -no luck
+Created a new atom named: HB1 within residue: .R<NMET 1>
+Created a new atom named: HG1 within residue: .R<NMET 1>
+Created a new atom named: HB1 within residue: .R<ASN 2>
+Created a new atom named: HA1 within residue: .R<GLY 3>
+Created a new atom named: HB1 within residue: .R<GLU 5>
+Created a new atom named: HG1 within residue: .R<GLU 5>
+Created a new atom named: HA1 within residue: .R<GLY 6>
+Created a new atom named: HD1 within residue: .R<PRO 7>
+Created a new atom named: HG1 within residue: .R<PRO 7>
+Created a new atom named: HB1 within residue: .R<PRO 7>
+Created a new atom named: HB1 within residue: .R<ASN 8>
+Created a new atom named: HB1 within residue: .R<PHE 9>
+Created a new atom named: HB1 within residue: .R<TYR 10>
+Created a new atom named: HD1 within residue: .R<PRO 12>
+Created a new atom named: HG1 within residue: .R<PRO 12>
+Created a new atom named: HB1 within residue: .R<PRO 12>
+Created a new atom named: HB1 within residue: .R<PHE 13>
+Created a new atom named: HB1 within residue: .R<SER 14>
+Created a new atom named: HB1 within residue: .R<ASN 15>
+Created a new atom named: HB1 within residue: .R<LYS 16>
+Created a new atom named: HG1 within residue: .R<LYS 16>
+Created a new atom named: HD1 within residue: .R<LYS 16>
+Created a new atom named: HE1 within residue: .R<LYS 16>
+Created a new atom named: HA1 within residue: .R<GLY 18>
+Created a new atom named: HB1 within residue: .R<ARG 21>
+Created a new atom named: HG1 within residue: .R<ARG 21>
+Created a new atom named: HD1 within residue: .R<ARG 21>
+Created a new atom named: HB1 within residue: .R<SER 22>
+Created a new atom named: HD1 within residue: .R<PRO 23>
+Created a new atom named: HG1 within residue: .R<PRO 23>
+Created a new atom named: HB1 within residue: .R<PRO 23>
+Created a new atom named: HB1 within residue: .R<PHE 24>
+Created a new atom named: HB1 within residue: .R<GLU 25>
+Created a new atom named: HG1 within residue: .R<GLU 25>
+Created a new atom named: HD1 within residue: .R<PRO 27>
+Created a new atom named: HG1 within residue: .R<PRO 27>
+Created a new atom named: HB1 within residue: .R<PRO 27>
+Created a new atom named: HB1 within residue: .R<GLN 28>
+Created a new atom named: HG1 within residue: .R<GLN 28>
+Created a new atom named: HB1 within residue: .R<TYR 29>
+Created a new atom named: HB1 within residue: .R<TYR 30>
+Created a new atom named: HB1 within residue: .R<LEU 31>
+Created a new atom named: HB1 within residue: .R<GLU 33>
+Created a new atom named: HG1 within residue: .R<GLU 33>
+Created a new atom named: HD1 within residue: .R<PRO 34>
+Created a new atom named: HG1 within residue: .R<PRO 34>
+Created a new atom named: HB1 within residue: .R<PRO 34>
+Created a new atom named: HB1 within residue: .R<TRP 35>
+Created a new atom named: HB1 within residue: .R<GLN 36>
+Created a new atom named: HG1 within residue: .R<GLN 36>
+Created a new atom named: HB1 within residue: .R<PHE 37>
+Created a new atom named: HB1 within residue: .R<SER 38>
+Created a new atom named: HB1 within residue: .R<MET 39>
+Created a new atom named: HG1 within residue: .R<MET 39>
+Created a new atom named: HB1 within residue: .R<LEU 40>
+Created a new atom named: HB1 within residue: .R<TYR 43>
+Created a new atom named: HB1 within residue: .R<MET 44>
+Created a new atom named: HG1 within residue: .R<MET 44>
+Created a new atom named: HB1 within residue: .R<PHE 45>
+Created a new atom named: HB1 within residue: .R<LEU 46>
+Created a new atom named: HB1 within residue: .R<LEU 47>
+Created a new atom named: HG11 within residue: .R<ILE 48>
+Created a new atom named: HD1 within residue: .R<ILE 48>
+Created a new atom named: HD2 within residue: .R<ILE 48>
+Created a new atom named: HD3 within residue: .R<ILE 48>
+Created a new atom named: HB1 within residue: .R<MET 49>
+Created a new atom named: HG1 within residue: .R<MET 49>
+Created a new atom named: HB1 within residue: .R<LEU 50>
+Created a new atom named: HA1 within residue: .R<GLY 51>
+Created a new atom named: HB1 within residue: .R<PHE 52>
+Created a new atom named: HD1 within residue: .R<PRO 53>
+Created a new atom named: HG1 within residue: .R<PRO 53>
+Created a new atom named: HB1 within residue: .R<PRO 53>
+Created a new atom named: HG11 within residue: .R<ILE 54>
+Created a new atom named: HD1 within residue: .R<ILE 54>
+Created a new atom named: HD2 within residue: .R<ILE 54>
+Created a new atom named: HD3 within residue: .R<ILE 54>
+Created a new atom named: HB1 within residue: .R<ASN 55>
+Created a new atom named: HB1 within residue: .R<PHE 56>
+Created a new atom named: HB1 within residue: .R<LEU 57>
+Created a new atom named: HB1 within residue: .R<LEU 59>
+Created a new atom named: HB1 within residue: .R<TYR 60>
+Created a new atom named: HB1 within residue: .R<GLN 64>
+Created a new atom named: HG1 within residue: .R<GLN 64>
+Created a new atom named: HB1 within residue: .R<HIP 65>
+Created a new atom named: HB1 within residue: .R<LYS 66>
+Created a new atom named: HG1 within residue: .R<LYS 66>
+Created a new atom named: HD1 within residue: .R<LYS 66>
+Created a new atom named: HE1 within residue: .R<LYS 66>
+Created a new atom named: HB1 within residue: .R<LYS 67>
+Created a new atom named: HG1 within residue: .R<LYS 67>
+Created a new atom named: HD1 within residue: .R<LYS 67>
+Created a new atom named: HE1 within residue: .R<LYS 67>
+Created a new atom named: HB1 within residue: .R<LEU 68>
+Created a new atom named: HB1 within residue: .R<ARG 69>
+Created a new atom named: HG1 within residue: .R<ARG 69>
+Created a new atom named: HD1 within residue: .R<ARG 69>
+Created a new atom named: HD1 within residue: .R<PRO 71>
+Created a new atom named: HG1 within residue: .R<PRO 71>
+Created a new atom named: HB1 within residue: .R<PRO 71>
+Created a new atom named: HB1 within residue: .R<LEU 72>
+Created a new atom named: HB1 within residue: .R<ASN 73>
+Created a new atom named: HB1 within residue: .R<TYR 74>
+Created a new atom named: HG11 within residue: .R<ILE 75>
+Created a new atom named: HD1 within residue: .R<ILE 75>
+Created a new atom named: HD2 within residue: .R<ILE 75>
+Created a new atom named: HD3 within residue: .R<ILE 75>
+Created a new atom named: HB1 within residue: .R<LEU 76>
+Created a new atom named: HB1 within residue: .R<LEU 77>
+Created a new atom named: HB1 within residue: .R<ASN 78>
+Created a new atom named: HB1 within residue: .R<LEU 79>
+Created a new atom named: HB1 within residue: .R<ASH 83>
+Created a new atom named: HB1 within residue: .R<LEU 84>
+Created a new atom named: HB1 within residue: .R<PHE 85>
+Created a new atom named: HB1 within residue: .R<MET 86>
+Created a new atom named: HG1 within residue: .R<MET 86>
+Created a new atom named: HB1 within residue: .R<PHE 88>
+Created a new atom named: HA1 within residue: .R<GLY 89>
+Created a new atom named: HA1 within residue: .R<GLY 90>
+Created a new atom named: HB1 within residue: .R<PHE 91>
+Created a new atom named: HB1 within residue: .R<LEU 95>
+Created a new atom named: HB1 within residue: .R<TYR 96>
+Created a new atom named: HB1 within residue: .R<SER 98>
+Created a new atom named: HB1 within residue: .R<LEU 99>
+Created a new atom named: HB1 within residue: .R<HIP 100>
+Created a new atom named: HA1 within residue: .R<GLY 101>
+Created a new atom named: HB1 within residue: .R<TYR 102>
+Created a new atom named: HB1 within residue: .R<PHE 103>
+Created a new atom named: HB1 within residue: .R<PHE 105>
+Created a new atom named: HA1 within residue: .R<GLY 106>
+Created a new atom named: HD1 within residue: .R<PRO 107>
+Created a new atom named: HG1 within residue: .R<PRO 107>
+Created a new atom named: HB1 within residue: .R<PRO 107>
+Created a new atom named: HA1 within residue: .R<GLY 109>
+Created a new atom named: HB1 within residue: .R<CYS 110>
+Created a new atom named: HB1 within residue: .R<ASN 111>
+Created a new atom named: HB1 within residue: .R<LEU 112>
+Created a new atom named: HB1 within residue: .R<GLU 113>
+Created a new atom named: HG1 within residue: .R<GLU 113>
+Created a new atom named: HA1 within residue: .R<GLY 114>
+Created a new atom named: HB1 within residue: .R<PHE 115>
+Created a new atom named: HB1 within residue: .R<PHE 116>
+Created a new atom named: HB1 within residue: .R<LEU 119>
+Created a new atom named: HA1 within residue: .R<GLY 120>
+Created a new atom named: HA1 within residue: .R<GLY 121>
+Created a new atom named: HB1 within residue: .R<GLH 122>
+Created a new atom named: HG1 within residue: .R<GLH 122>
+Created a new atom named: HG11 within residue: .R<ILE 123>
+Created a new atom named: HD1 within residue: .R<ILE 123>
+Created a new atom named: HD2 within residue: .R<ILE 123>
+Created a new atom named: HD3 within residue: .R<ILE 123>
+Created a new atom named: HB1 within residue: .R<LEU 125>
+Created a new atom named: HB1 within residue: .R<TRP 126>
+Created a new atom named: HB1 within residue: .R<SER 127>
+Created a new atom named: HB1 within residue: .R<LEU 128>
+Created a new atom named: HB1 within residue: .R<LEU 131>
+Created a new atom named: HG11 within residue: .R<ILE 133>
+Created a new atom named: HD1 within residue: .R<ILE 133>
+Created a new atom named: HD2 within residue: .R<ILE 133>
+Created a new atom named: HD3 within residue: .R<ILE 133>
+Created a new atom named: HB1 within residue: .R<GLU 134>
+Created a new atom named: HG1 within residue: .R<GLU 134>
+Created a new atom named: HB1 within residue: .R<ARG 135>
+Created a new atom named: HG1 within residue: .R<ARG 135>
+Created a new atom named: HD1 within residue: .R<ARG 135>
+Created a new atom named: HB1 within residue: .R<TYR 136>
+Created a new atom named: HB1 within residue: .R<CYS 140>
+Created a new atom named: HB1 within residue: .R<LYS 141>
+Created a new atom named: HG1 within residue: .R<LYS 141>
+Created a new atom named: HD1 within residue: .R<LYS 141>
+Created a new atom named: HE1 within residue: .R<LYS 141>
+Created a new atom named: HD1 within residue: .R<PRO 142>
+Created a new atom named: HG1 within residue: .R<PRO 142>
+Created a new atom named: HB1 within residue: .R<PRO 142>
+Created a new atom named: HB1 within residue: .R<MET 143>
+Created a new atom named: HG1 within residue: .R<MET 143>
+Created a new atom named: HB1 within residue: .R<SER 144>
+Created a new atom named: HB1 within residue: .R<ASN 145>
+Created a new atom named: HB1 within residue: .R<PHE 146>
+Created a new atom named: HB1 within residue: .R<ARG 147>
+Created a new atom named: HG1 within residue: .R<ARG 147>
+Created a new atom named: HD1 within residue: .R<ARG 147>
+Created a new atom named: HB1 within residue: .R<PHE 148>
+Created a new atom named: HA1 within residue: .R<GLY 149>
+Created a new atom named: HB1 within residue: .R<GLU 150>
+Created a new atom named: HG1 within residue: .R<GLU 150>
+Created a new atom named: HB1 within residue: .R<ASN 151>
+Created a new atom named: HB1 within residue: .R<HIP 152>
+Created a new atom named: HG11 within residue: .R<ILE 154>
+Created a new atom named: HD1 within residue: .R<ILE 154>
+Created a new atom named: HD2 within residue: .R<ILE 154>
+Created a new atom named: HD3 within residue: .R<ILE 154>
+Created a new atom named: HB1 within residue: .R<MET 155>
+Created a new atom named: HG1 within residue: .R<MET 155>
+Created a new atom named: HA1 within residue: .R<GLY 156>
+Created a new atom named: HB1 within residue: .R<PHE 159>
+Created a new atom named: HB1 within residue: .R<TRP 161>
+Created a new atom named: HB1 within residue: .R<MET 163>
+Created a new atom named: HG1 within residue: .R<MET 163>
+Created a new atom named: HB1 within residue: .R<LEU 165>
+Created a new atom named: HB1 within residue: .R<CYS 167>
+Created a new atom named: HD1 within residue: .R<PRO 170>
+Created a new atom named: HG1 within residue: .R<PRO 170>
+Created a new atom named: HB1 within residue: .R<PRO 170>
+Created a new atom named: HD1 within residue: .R<PRO 171>
+Created a new atom named: HG1 within residue: .R<PRO 171>
+Created a new atom named: HB1 within residue: .R<PRO 171>
+Created a new atom named: HB1 within residue: .R<LEU 172>
+Created a new atom named: HA1 within residue: .R<GLY 174>
+Created a new atom named: HB1 within residue: .R<TRP 175>
+Created a new atom named: HB1 within residue: .R<SER 176>
+Created a new atom named: HB1 within residue: .R<ARG 177>
+Created a new atom named: HG1 within residue: .R<ARG 177>
+Created a new atom named: HD1 within residue: .R<ARG 177>
+Created a new atom named: HB1 within residue: .R<TYR 178>
+Created a new atom named: HG11 within residue: .R<ILE 179>
+Created a new atom named: HD1 within residue: .R<ILE 179>
+Created a new atom named: HD2 within residue: .R<ILE 179>
+Created a new atom named: HD3 within residue: .R<ILE 179>
+Created a new atom named: HD1 within residue: .R<PRO 180>
+Created a new atom named: HG1 within residue: .R<PRO 180>
+Created a new atom named: HB1 within residue: .R<PRO 180>
+Created a new atom named: HB1 within residue: .R<GLH 181>
+Created a new atom named: HG1 within residue: .R<GLH 181>
+Created a new atom named: HA1 within residue: .R<GLY 182>
+Created a new atom named: HB1 within residue: .R<MET 183>
+Created a new atom named: HG1 within residue: .R<MET 183>
+Created a new atom named: HB1 within residue: .R<GLN 184>
+Created a new atom named: HG1 within residue: .R<GLN 184>
+Created a new atom named: HB1 within residue: .R<CYS 185>
+Created a new atom named: HB1 within residue: .R<SER 186>
+Created a new atom named: HB1 within residue: .R<CYS 187>
+Created a new atom named: HA1 within residue: .R<GLY 188>
+Created a new atom named: HG11 within residue: .R<ILE 189>
+Created a new atom named: HD1 within residue: .R<ILE 189>
+Created a new atom named: HD2 within residue: .R<ILE 189>
+Created a new atom named: HD3 within residue: .R<ILE 189>
+Created a new atom named: HB1 within residue: .R<ASP 190>
+Created a new atom named: HB1 within residue: .R<TYR 191>
+Created a new atom named: HB1 within residue: .R<TYR 192>
+Created a new atom named: HD1 within residue: .R<PRO 194>
+Created a new atom named: HG1 within residue: .R<PRO 194>
+Created a new atom named: HB1 within residue: .R<PRO 194>
+Created a new atom named: HB1 within residue: .R<HIP 195>
+Created a new atom named: HB1 within residue: .R<GLU 196>
+Created a new atom named: HG1 within residue: .R<GLU 196>
+Created a new atom named: HB1 within residue: .R<GLU 197>
+Created a new atom named: HG1 within residue: .R<GLU 197>
+Created a new atom named: HB1 within residue: .R<ASN 199>
+Created a new atom named: HB1 within residue: .R<ASN 200>
+Created a new atom named: HB1 within residue: .R<GLU 201>
+Created a new atom named: HG1 within residue: .R<GLU 201>
+Created a new atom named: HB1 within residue: .R<SER 202>
+Created a new atom named: HB1 within residue: .R<PHE 203>
+Created a new atom named: HG11 within residue: .R<ILE 205>
+Created a new atom named: HD1 within residue: .R<ILE 205>
+Created a new atom named: HD2 within residue: .R<ILE 205>
+Created a new atom named: HD3 within residue: .R<ILE 205>
+Created a new atom named: HB1 within residue: .R<TYR 206>
+Created a new atom named: HB1 within residue: .R<MET 207>
+Created a new atom named: HG1 within residue: .R<MET 207>
+Created a new atom named: HB1 within residue: .R<PHE 208>
+Created a new atom named: HB1 within residue: .R<HID 211>
+Created a new atom named: HB1 within residue: .R<PHE 212>
+Created a new atom named: HG11 within residue: .R<ILE 213>
+Created a new atom named: HD1 within residue: .R<ILE 213>
+Created a new atom named: HD2 within residue: .R<ILE 213>
+Created a new atom named: HD3 within residue: .R<ILE 213>
+Created a new atom named: HG11 within residue: .R<ILE 214>
+Created a new atom named: HD1 within residue: .R<ILE 214>
+Created a new atom named: HD2 within residue: .R<ILE 214>
+Created a new atom named: HD3 within residue: .R<ILE 214>
+Created a new atom named: HD1 within residue: .R<PRO 215>
+Created a new atom named: HG1 within residue: .R<PRO 215>
+Created a new atom named: HB1 within residue: .R<PRO 215>
+Created a new atom named: HB1 within residue: .R<LEU 216>
+Created a new atom named: HG11 within residue: .R<ILE 217>
+Created a new atom named: HD1 within residue: .R<ILE 217>
+Created a new atom named: HD2 within residue: .R<ILE 217>
+Created a new atom named: HD3 within residue: .R<ILE 217>
+Created a new atom named: HG11 within residue: .R<ILE 219>
+Created a new atom named: HD1 within residue: .R<ILE 219>
+Created a new atom named: HD2 within residue: .R<ILE 219>
+Created a new atom named: HD3 within residue: .R<ILE 219>
+Created a new atom named: HB1 within residue: .R<PHE 220>
+Created a new atom named: HB1 within residue: .R<PHE 221>
+Created a new atom named: HB1 within residue: .R<CYS 222>
+Created a new atom named: HB1 within residue: .R<TYR 223>
+Created a new atom named: HA1 within residue: .R<GLY 224>
+Created a new atom named: HB1 within residue: .R<GLN 225>
+Created a new atom named: HG1 within residue: .R<GLN 225>
+Created a new atom named: HB1 within residue: .R<LEU 226>
+Created a new atom named: HB1 within residue: .R<PHE 228>
+Created a new atom named: HB1 within residue: .R<LYS 231>
+Created a new atom named: HG1 within residue: .R<LYS 231>
+Created a new atom named: HD1 within residue: .R<LYS 231>
+Created a new atom named: HE1 within residue: .R<LYS 231>
+Created a new atom named: HB1 within residue: .R<GLU 232>
+Created a new atom named: HG1 within residue: .R<GLU 232>
+Created a new atom named: HB1 within residue: .R<GLN 236>
+Created a new atom named: HG1 within residue: .R<GLN 236>
+Created a new atom named: HB1 within residue: .R<GLN 237>
+Created a new atom named: HG1 within residue: .R<GLN 237>
+Created a new atom named: HB1 within residue: .R<GLN 238>
+Created a new atom named: HG1 within residue: .R<GLN 238>
+Created a new atom named: HB1 within residue: .R<GLU 239>
+Created a new atom named: HG1 within residue: .R<GLU 239>
+Created a new atom named: HB1 within residue: .R<SER 240>
+Created a new atom named: HB1 within residue: .R<GLN 244>
+Created a new atom named: HG1 within residue: .R<GLN 244>
+Created a new atom named: HB1 within residue: .R<LYS 245>
+Created a new atom named: HG1 within residue: .R<LYS 245>
+Created a new atom named: HD1 within residue: .R<LYS 245>
+Created a new atom named: HE1 within residue: .R<LYS 245>
+Created a new atom named: HB1 within residue: .R<GLU 247>
+Created a new atom named: HG1 within residue: .R<GLU 247>
+Created a new atom named: HB1 within residue: .R<LYS 248>
+Created a new atom named: HG1 within residue: .R<LYS 248>
+Created a new atom named: HD1 within residue: .R<LYS 248>
+Created a new atom named: HE1 within residue: .R<LYS 248>
+Created a new atom named: HB1 within residue: .R<GLU 249>
+Created a new atom named: HG1 within residue: .R<GLU 249>
+Created a new atom named: HB1 within residue: .R<ARG 252>
+Created a new atom named: HG1 within residue: .R<ARG 252>
+Created a new atom named: HD1 within residue: .R<ARG 252>
+Created a new atom named: HB1 within residue: .R<MET 253>
+Created a new atom named: HG1 within residue: .R<MET 253>
+Created a new atom named: HG11 within residue: .R<ILE 255>
+Created a new atom named: HD1 within residue: .R<ILE 255>
+Created a new atom named: HD2 within residue: .R<ILE 255>
+Created a new atom named: HD3 within residue: .R<ILE 255>
+Created a new atom named: HG11 within residue: .R<ILE 256>
+Created a new atom named: HD1 within residue: .R<ILE 256>
+Created a new atom named: HD2 within residue: .R<ILE 256>
+Created a new atom named: HD3 within residue: .R<ILE 256>
+Created a new atom named: HB1 within residue: .R<MET 257>
+Created a new atom named: HG1 within residue: .R<MET 257>
+Created a new atom named: HG11 within residue: .R<ILE 259>
+Created a new atom named: HD1 within residue: .R<ILE 259>
+Created a new atom named: HD2 within residue: .R<ILE 259>
+Created a new atom named: HD3 within residue: .R<ILE 259>
+Created a new atom named: HB1 within residue: .R<PHE 261>
+Created a new atom named: HB1 within residue: .R<LEU 262>
+Created a new atom named: HG11 within residue: .R<ILE 263>
+Created a new atom named: HD1 within residue: .R<ILE 263>
+Created a new atom named: HD2 within residue: .R<ILE 263>
+Created a new atom named: HD3 within residue: .R<ILE 263>
+Created a new atom named: HB1 within residue: .R<CYS 264>
+Created a new atom named: HB1 within residue: .R<TRP 265>
+Created a new atom named: HB1 within residue: .R<LEU 266>
+Created a new atom named: HD1 within residue: .R<PRO 267>
+Created a new atom named: HG1 within residue: .R<PRO 267>
+Created a new atom named: HB1 within residue: .R<PRO 267>
+Created a new atom named: HB1 within residue: .R<TYR 268>
+Created a new atom named: HA1 within residue: .R<GLY 270>
+Created a new atom named: HB1 within residue: .R<PHE 273>
+Created a new atom named: HB1 within residue: .R<TYR 274>
+Created a new atom named: HG11 within residue: .R<ILE 275>
+Created a new atom named: HD1 within residue: .R<ILE 275>
+Created a new atom named: HD2 within residue: .R<ILE 275>
+Created a new atom named: HD3 within residue: .R<ILE 275>
+Created a new atom named: HB1 within residue: .R<PHE 276>
+Created a new atom named: HB1 within residue: .R<HIP 278>
+Created a new atom named: HB1 within residue: .R<GLN 279>
+Created a new atom named: HG1 within residue: .R<GLN 279>
+Created a new atom named: HA1 within residue: .R<GLY 280>
+Created a new atom named: HB1 within residue: .R<SER 281>
+Created a new atom named: HB1 within residue: .R<ASP 282>
+Created a new atom named: HB1 within residue: .R<PHE 283>
+Created a new atom named: HA1 within residue: .R<GLY 284>
+Created a new atom named: HD1 within residue: .R<PRO 285>
+Created a new atom named: HG1 within residue: .R<PRO 285>
+Created a new atom named: HB1 within residue: .R<PRO 285>
+Created a new atom named: HG11 within residue: .R<ILE 286>
+Created a new atom named: HD1 within residue: .R<ILE 286>
+Created a new atom named: HD2 within residue: .R<ILE 286>
+Created a new atom named: HD3 within residue: .R<ILE 286>
+Created a new atom named: HB1 within residue: .R<PHE 287>
+Created a new atom named: HB1 within residue: .R<MET 288>
+Created a new atom named: HG1 within residue: .R<MET 288>
+Created a new atom named: HG11 within residue: .R<ILE 290>
+Created a new atom named: HD1 within residue: .R<ILE 290>
+Created a new atom named: HD2 within residue: .R<ILE 290>
+Created a new atom named: HD3 within residue: .R<ILE 290>
+Created a new atom named: HD1 within residue: .R<PRO 291>
+Created a new atom named: HG1 within residue: .R<PRO 291>
+Created a new atom named: HB1 within residue: .R<PRO 291>
+Created a new atom named: HB1 within residue: .R<PHE 293>
+Created a new atom named: HB1 within residue: .R<PHE 294>
+  Added missing heavy atom: .R<CALA 295>.A<OXT 11>
+Creating new UNIT for residue: RET sequence: 296
+Created a new atom named: C1 within residue: .R<RET 296>
+Created a new atom named: C2 within residue: .R<RET 296>
+Created a new atom named: HC21 within residue: .R<RET 296>
+Created a new atom named: HC22 within residue: .R<RET 296>
+Created a new atom named: C3 within residue: .R<RET 296>
+Created a new atom named: HC31 within residue: .R<RET 296>
+Created a new atom named: HC32 within residue: .R<RET 296>
+Created a new atom named: C4 within residue: .R<RET 296>
+Created a new atom named: HC41 within residue: .R<RET 296>
+Created a new atom named: HC42 within residue: .R<RET 296>
+Created a new atom named: C5 within residue: .R<RET 296>
+Created a new atom named: C6 within residue: .R<RET 296>
+Created a new atom named: C7 within residue: .R<RET 296>
+Created a new atom named: HC71 within residue: .R<RET 296>
+Created a new atom named: C8 within residue: .R<RET 296>
+Created a new atom named: HC81 within residue: .R<RET 296>
+Created a new atom named: C9 within residue: .R<RET 296>
+Created a new atom named: CF within residue: .R<RET 296>
+Created a new atom named: HCF1 within residue: .R<RET 296>
+Created a new atom named: CI within residue: .R<RET 296>
+Created a new atom named: HCI1 within residue: .R<RET 296>
+Created a new atom named: CJ within residue: .R<RET 296>
+Created a new atom named: HCJ1 within residue: .R<RET 296>
+Created a new atom named: C13 within residue: .R<RET 296>
+Created a new atom named: CK within residue: .R<RET 296>
+Created a new atom named: HCK1 within residue: .R<RET 296>
+Created a new atom named: CM within residue: .R<RET 296>
+Created a new atom named: HCM1 within residue: .R<RET 296>
+Created a new atom named: CO within residue: .R<RET 296>
+Created a new atom named: HCO1 within residue: .R<RET 296>
+Created a new atom named: HCO2 within residue: .R<RET 296>
+Created a new atom named: HCO3 within residue: .R<RET 296>
+Created a new atom named: CP within residue: .R<RET 296>
+Created a new atom named: HCP1 within residue: .R<RET 296>
+Created a new atom named: HCP2 within residue: .R<RET 296>
+Created a new atom named: HCP3 within residue: .R<RET 296>
+Created a new atom named: CQ within residue: .R<RET 296>
+Created a new atom named: HCQ1 within residue: .R<RET 296>
+Created a new atom named: HCQ2 within residue: .R<RET 296>
+Created a new atom named: HCQ3 within residue: .R<RET 296>
+Created a new atom named: CU within residue: .R<RET 296>
+Created a new atom named: HCU1 within residue: .R<RET 296>
+Created a new atom named: HCU2 within residue: .R<RET 296>
+Created a new atom named: HCU3 within residue: .R<RET 296>
+Created a new atom named: CX within residue: .R<RET 296>
+Created a new atom named: HCX1 within residue: .R<RET 296>
+Created a new atom named: HCX2 within residue: .R<RET 296>
+Created a new atom named: HCX3 within residue: .R<RET 296>
+Created a new atom named: N within residue: .R<RET 296>
+Created a new atom named: H within residue: .R<RET 296>
+Created a new atom named: CA within residue: .R<RET 296>
+Created a new atom named: HA within residue: .R<RET 296>
+Created a new atom named: CB within residue: .R<RET 296>
+Created a new atom named: HB1 within residue: .R<RET 296>
+Created a new atom named: HB2 within residue: .R<RET 296>
+Created a new atom named: CG within residue: .R<RET 296>
+Created a new atom named: HG1 within residue: .R<RET 296>
+Created a new atom named: HG2 within residue: .R<RET 296>
+Created a new atom named: CD within residue: .R<RET 296>
+Created a new atom named: HD1 within residue: .R<RET 296>
+Created a new atom named: HD2 within residue: .R<RET 296>
+Created a new atom named: CE within residue: .R<RET 296>
+Created a new atom named: HE1 within residue: .R<RET 296>
+Created a new atom named: HE2 within residue: .R<RET 296>
+Created a new atom named: NZ within residue: .R<RET 296>
+Created a new atom named: HZ1 within residue: .R<RET 296>
+Created a new atom named: C within residue: .R<RET 296>
+Created a new atom named: O within residue: .R<RET 296>
+Created a new atom named: H within residue: .R<NTHR 297>
+Created a new atom named: HB1 within residue: .R<SER 298>
+Created a new atom named: HB1 within residue: .R<TYR 301>
+Created a new atom named: HB1 within residue: .R<ASN 302>
+Created a new atom named: HD1 within residue: .R<PRO 303>
+Created a new atom named: HG1 within residue: .R<PRO 303>
+Created a new atom named: HB1 within residue: .R<PRO 303>
+Created a new atom named: HG11 within residue: .R<ILE 305>
+Created a new atom named: HD1 within residue: .R<ILE 305>
+Created a new atom named: HD2 within residue: .R<ILE 305>
+Created a new atom named: HD3 within residue: .R<ILE 305>
+Created a new atom named: HB1 within residue: .R<TYR 306>
+Created a new atom named: HG11 within residue: .R<ILE 307>
+Created a new atom named: HD1 within residue: .R<ILE 307>
+Created a new atom named: HD2 within residue: .R<ILE 307>
+Created a new atom named: HD3 within residue: .R<ILE 307>
+Created a new atom named: HB1 within residue: .R<MET 308>
+Created a new atom named: HG1 within residue: .R<MET 308>
+Created a new atom named: HB1 within residue: .R<MET 309>
+Created a new atom named: HG1 within residue: .R<MET 309>
+Created a new atom named: HB1 within residue: .R<ASN 310>
+Created a new atom named: HB1 within residue: .R<LYS 311>
+Created a new atom named: HG1 within residue: .R<LYS 311>
+Created a new atom named: HD1 within residue: .R<LYS 311>
+Created a new atom named: HE1 within residue: .R<LYS 311>
+Created a new atom named: HB1 within residue: .R<GLN 312>
+Created a new atom named: HG1 within residue: .R<GLN 312>
+Created a new atom named: HB1 within residue: .R<PHE 313>
+Created a new atom named: HB1 within residue: .R<ARG 314>
+Created a new atom named: HG1 within residue: .R<ARG 314>
+Created a new atom named: HD1 within residue: .R<ARG 314>
+Created a new atom named: HB1 within residue: .R<ASN 315>
+Created a new atom named: HB1 within residue: .R<CYS 316>
+Created a new atom named: HB1 within residue: .R<MET 317>
+Created a new atom named: HG1 within residue: .R<MET 317>
+Created a new atom named: HB1 within residue: .R<LEU 321>
+Created a new atom named: HB1 within residue: .R<CYS 322>
+Created a new atom named: HB1 within residue: .R<CYS 323>
+Created a new atom named: HA1 within residue: .R<GLY 324>
+Created a new atom named: HB1 within residue: .R<LYS 325>
+Created a new atom named: HG1 within residue: .R<LYS 325>
+Created a new atom named: HD1 within residue: .R<LYS 325>
+Created a new atom named: HE1 within residue: .R<LYS 325>
+Created a new atom named: HB1 within residue: .R<ASN 326>
+Created a new atom named: HD1 within residue: .R<PRO 327>
+Created a new atom named: HG1 within residue: .R<PRO 327>
+Created a new atom named: HB1 within residue: .R<PRO 327>
+Created a new atom named: HB1 within residue: .R<LEU 328>
+Created a new atom named: HA1 within residue: .R<GLY 329>
+Created a new atom named: HB1 within residue: .R<ASP 330>
+Created a new atom named: HB1 within residue: .R<ASP 331>
+Created a new atom named: HB1 within residue: .R<GLU 332>
+Created a new atom named: HG1 within residue: .R<GLU 332>
+Created a new atom named: HB1 within residue: .R<SER 334>
+Created a new atom named: HB1 within residue: .R<SER 338>
+Created a new atom named: HB1 within residue: .R<LYS 339>
+Created a new atom named: HG1 within residue: .R<LYS 339>
+Created a new atom named: HD1 within residue: .R<LYS 339>
+Created a new atom named: HE1 within residue: .R<LYS 339>
+Created a new atom named: HB1 within residue: .R<GLU 341>
+Created a new atom named: HG1 within residue: .R<GLU 341>
+Created a new atom named: HB1 within residue: .R<SER 343>
+Created a new atom named: HB1 within residue: .R<GLN 344>
+Created a new atom named: HG1 within residue: .R<GLN 344>
+Created a new atom named: HD1 within residue: .R<PRO 347>
+Created a new atom named: HG1 within residue: .R<PRO 347>
+Created a new atom named: HB1 within residue: .R<PRO 347>
+Created a new atom named: OC1 within residue: .R<CALA 348>
+Created a new atom named: OC2 within residue: .R<CALA 348>
+Creating new UNIT for residue: Cl sequence: 349
+Created a new atom named: Cl- within residue: .R<Cl 349>
+Creating new UNIT for residue: Cl sequence: 350
+Created a new atom named: Cl- within residue: .R<Cl 350>
+Creating new UNIT for residue: Cl sequence: 351
+Created a new atom named: Cl- within residue: .R<Cl 351>
+Creating new UNIT for residue: Cl sequence: 352
+Created a new atom named: Cl- within residue: .R<Cl 352>
+Creating new UNIT for residue: Cl sequence: 353
+Created a new atom named: Cl- within residue: .R<Cl 353>
+Creating new UNIT for residue: Cl sequence: 354
+Created a new atom named: Cl- within residue: .R<Cl 354>
+Creating new UNIT for residue: Na sequence: 355
+Created a new atom named: Na+ within residue: .R<Na 355>
+Creating new UNIT for residue: Na sequence: 356
+Created a new atom named: Na+ within residue: .R<Na 356>
+Creating new UNIT for residue: AT sequence: 357
+Created a new atom named: O within residue: .R<AT 357>
+Created a new atom named: H1 within residue: .R<AT 357>
+Created a new atom named: H2 within residue: .R<AT 357>
+Creating new UNIT for residue: AT sequence: 358
+Created a new atom named: O within residue: .R<AT 358>
+Created a new atom named: H1 within residue: .R<AT 358>
+Created a new atom named: H2 within residue: .R<AT 358>
+Creating new UNIT for residue: AT sequence: 359
+Created a new atom named: O within residue: .R<AT 359>
+Created a new atom named: H1 within residue: .R<AT 359>
+Created a new atom named: H2 within residue: .R<AT 359>
+Creating new UNIT for residue: AT sequence: 360
+Created a new atom named: O within residue: .R<AT 360>
+Created a new atom named: H1 within residue: .R<AT 360>
+Created a new atom named: H2 within residue: .R<AT 360>
+Creating new UNIT for residue: AT sequence: 361
+Created a new atom named: O within residue: .R<AT 361>
+Created a new atom named: H1 within residue: .R<AT 361>
+Created a new atom named: H2 within residue: .R<AT 361>
+Creating new UNIT for residue: AT sequence: 362
+Created a new atom named: O within residue: .R<AT 362>
+Created a new atom named: H1 within residue: .R<AT 362>
+Created a new atom named: H2 within residue: .R<AT 362>
+Creating new UNIT for residue: AT sequence: 363
+Created a new atom named: O within residue: .R<AT 363>
+Created a new atom named: H1 within residue: .R<AT 363>
+Created a new atom named: H2 within residue: .R<AT 363>
+Creating new UNIT for residue: AT sequence: 364
+Created a new atom named: O within residue: .R<AT 364>
+Created a new atom named: H1 within residue: .R<AT 364>
+Created a new atom named: H2 within residue: .R<AT 364>
+Creating new UNIT for residue: AT sequence: 365
+Created a new atom named: O within residue: .R<AT 365>
+Created a new atom named: H1 within residue: .R<AT 365>
+Created a new atom named: H2 within residue: .R<AT 365>
+Creating new UNIT for residue: AT sequence: 366
+Created a new atom named: O within residue: .R<AT 366>
+Created a new atom named: H1 within residue: .R<AT 366>
+Created a new atom named: H2 within residue: .R<AT 366>
+Creating new UNIT for residue: AT sequence: 367
+Created a new atom named: O within residue: .R<AT 367>
+Created a new atom named: H1 within residue: .R<AT 367>
+Created a new atom named: H2 within residue: .R<AT 367>
+Creating new UNIT for residue: AT sequence: 368
+Created a new atom named: O within residue: .R<AT 368>
+Created a new atom named: H1 within residue: .R<AT 368>
+Created a new atom named: H2 within residue: .R<AT 368>
+Creating new UNIT for residue: AT sequence: 369
+Created a new atom named: O within residue: .R<AT 369>
+Created a new atom named: H1 within residue: .R<AT 369>
+Created a new atom named: H2 within residue: .R<AT 369>
+Creating new UNIT for residue: AT sequence: 370
+Created a new atom named: O within residue: .R<AT 370>
+Created a new atom named: H1 within residue: .R<AT 370>
+Created a new atom named: H2 within residue: .R<AT 370>
+Creating new UNIT for residue: AT sequence: 371
+Created a new atom named: O within residue: .R<AT 371>
+Created a new atom named: H1 within residue: .R<AT 371>
+Created a new atom named: H2 within residue: .R<AT 371>
+  total atoms in file: 113300
+  Leap added 4 missing atoms according to residue templates:
+       1 Heavy
+       3 H / lone pairs
+  The file contained 579 atoms not in residue templates
+> saveamberparm system sys.prmtop sys.inpcrd
+Checking Unit.
+
+Warning: The unperturbed charge of the unit (4.000000) is not zero.
+FATAL:  Atom .R<NMET 1>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<NMET 1>.A<HG1 21> does not have a type.
+FATAL:  Atom .R<ASN 2>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<GLY 3>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<GLU 5>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 5>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<GLY 6>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<PRO 7>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 7>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 7>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<ASN 8>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<PHE 9>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<TYR 10>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<PRO 12>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 12>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 12>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<PHE 13>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<SER 14>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<ASN 15>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<LYS 16>.A<HB1 23> does not have a type.
+FATAL:  Atom .R<LYS 16>.A<HG1 24> does not have a type.
+FATAL:  Atom .R<LYS 16>.A<HD1 25> does not have a type.
+FATAL:  Atom .R<LYS 16>.A<HE1 26> does not have a type.
+FATAL:  Atom .R<GLY 18>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<ARG 21>.A<HB1 25> does not have a type.
+FATAL:  Atom .R<ARG 21>.A<HG1 26> does not have a type.
+FATAL:  Atom .R<ARG 21>.A<HD1 27> does not have a type.
+FATAL:  Atom .R<SER 22>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<PRO 23>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 23>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 23>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<PHE 24>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<GLU 25>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 25>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<PRO 27>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 27>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 27>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<GLN 28>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<GLN 28>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<TYR 29>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<TYR 30>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<LEU 31>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<GLU 33>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 33>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<PRO 34>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 34>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 34>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<TRP 35>.A<HB1 25> does not have a type.
+FATAL:  Atom .R<GLN 36>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<GLN 36>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<PHE 37>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<SER 38>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<MET 39>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 39>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<LEU 40>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<TYR 43>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<MET 44>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 44>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<PHE 45>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<LEU 46>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<LEU 47>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<ILE 48>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 48>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 48>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 48>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<MET 49>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 49>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<LEU 50>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<GLY 51>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<PHE 52>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<PRO 53>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 53>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 53>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<ILE 54>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 54>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 54>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 54>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<ASN 55>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<PHE 56>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<LEU 57>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<LEU 59>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<TYR 60>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<GLN 64>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<GLN 64>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<HIP 65>.A<HB1 19> does not have a type.
+FATAL:  Atom .R<LYS 66>.A<HB1 23> does not have a type.
+FATAL:  Atom .R<LYS 66>.A<HG1 24> does not have a type.
+FATAL:  Atom .R<LYS 66>.A<HD1 25> does not have a type.
+FATAL:  Atom .R<LYS 66>.A<HE1 26> does not have a type.
+FATAL:  Atom .R<LYS 67>.A<HB1 23> does not have a type.
+FATAL:  Atom .R<LYS 67>.A<HG1 24> does not have a type.
+FATAL:  Atom .R<LYS 67>.A<HD1 25> does not have a type.
+FATAL:  Atom .R<LYS 67>.A<HE1 26> does not have a type.
+FATAL:  Atom .R<LEU 68>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<ARG 69>.A<HB1 25> does not have a type.
+FATAL:  Atom .R<ARG 69>.A<HG1 26> does not have a type.
+FATAL:  Atom .R<ARG 69>.A<HD1 27> does not have a type.
+FATAL:  Atom .R<PRO 71>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 71>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 71>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<LEU 72>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<ASN 73>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<TYR 74>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<ILE 75>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 75>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 75>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 75>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<LEU 76>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<LEU 77>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<ASN 78>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<LEU 79>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<ASH 83>.A<HB1 14> does not have a type.
+FATAL:  Atom .R<LEU 84>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<PHE 85>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<MET 86>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 86>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<PHE 88>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<GLY 89>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<GLY 90>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<PHE 91>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<LEU 95>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<TYR 96>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<SER 98>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<LEU 99>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<HIP 100>.A<HB1 19> does not have a type.
+FATAL:  Atom .R<GLY 101>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<TYR 102>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<PHE 103>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<PHE 105>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<GLY 106>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<PRO 107>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 107>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 107>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<GLY 109>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<CYS 110>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<ASN 111>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<LEU 112>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<GLU 113>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 113>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<GLY 114>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<PHE 115>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<PHE 116>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<LEU 119>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<GLY 120>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<GLY 121>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<GLH 122>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<GLH 122>.A<HG1 18> does not have a type.
+FATAL:  Atom .R<ILE 123>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 123>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 123>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 123>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<LEU 125>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<TRP 126>.A<HB1 25> does not have a type.
+FATAL:  Atom .R<SER 127>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<LEU 128>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<LEU 131>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<ILE 133>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 133>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 133>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 133>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<GLU 134>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 134>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<ARG 135>.A<HB1 25> does not have a type.
+FATAL:  Atom .R<ARG 135>.A<HG1 26> does not have a type.
+FATAL:  Atom .R<ARG 135>.A<HD1 27> does not have a type.
+FATAL:  Atom .R<TYR 136>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<CYS 140>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<LYS 141>.A<HB1 23> does not have a type.
+FATAL:  Atom .R<LYS 141>.A<HG1 24> does not have a type.
+FATAL:  Atom .R<LYS 141>.A<HD1 25> does not have a type.
+FATAL:  Atom .R<LYS 141>.A<HE1 26> does not have a type.
+FATAL:  Atom .R<PRO 142>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 142>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 142>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<MET 143>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 143>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<SER 144>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<ASN 145>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<PHE 146>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<ARG 147>.A<HB1 25> does not have a type.
+FATAL:  Atom .R<ARG 147>.A<HG1 26> does not have a type.
+FATAL:  Atom .R<ARG 147>.A<HD1 27> does not have a type.
+FATAL:  Atom .R<PHE 148>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<GLY 149>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<GLU 150>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 150>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<ASN 151>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<HIP 152>.A<HB1 19> does not have a type.
+FATAL:  Atom .R<ILE 154>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 154>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 154>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 154>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<MET 155>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 155>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<GLY 156>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<PHE 159>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<TRP 161>.A<HB1 25> does not have a type.
+FATAL:  Atom .R<MET 163>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 163>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<LEU 165>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<CYS 167>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<PRO 170>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 170>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 170>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<PRO 171>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 171>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 171>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<LEU 172>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<GLY 174>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<TRP 175>.A<HB1 25> does not have a type.
+FATAL:  Atom .R<SER 176>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<ARG 177>.A<HB1 25> does not have a type.
+FATAL:  Atom .R<ARG 177>.A<HG1 26> does not have a type.
+FATAL:  Atom .R<ARG 177>.A<HD1 27> does not have a type.
+FATAL:  Atom .R<TYR 178>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<ILE 179>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 179>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 179>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 179>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<PRO 180>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 180>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 180>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<GLH 181>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<GLH 181>.A<HG1 18> does not have a type.
+FATAL:  Atom .R<GLY 182>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<MET 183>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 183>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<GLN 184>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<GLN 184>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<CYS 185>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<SER 186>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<CYS 187>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<GLY 188>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<ILE 189>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 189>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 189>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 189>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<ASP 190>.A<HB1 13> does not have a type.
+FATAL:  Atom .R<TYR 191>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<TYR 192>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<PRO 194>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 194>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 194>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<HIP 195>.A<HB1 19> does not have a type.
+FATAL:  Atom .R<GLU 196>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 196>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<GLU 197>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 197>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<ASN 199>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<ASN 200>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<GLU 201>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 201>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<SER 202>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<PHE 203>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<ILE 205>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 205>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 205>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 205>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<TYR 206>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<MET 207>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 207>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<PHE 208>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<HID 211>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<PHE 212>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<ILE 213>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 213>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 213>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 213>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<ILE 214>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 214>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 214>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 214>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<PRO 215>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 215>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 215>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<LEU 216>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<ILE 217>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 217>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 217>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 217>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<ILE 219>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 219>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 219>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 219>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<PHE 220>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<PHE 221>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<CYS 222>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<TYR 223>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<GLY 224>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<GLN 225>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<GLN 225>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<LEU 226>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<PHE 228>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<LYS 231>.A<HB1 23> does not have a type.
+FATAL:  Atom .R<LYS 231>.A<HG1 24> does not have a type.
+FATAL:  Atom .R<LYS 231>.A<HD1 25> does not have a type.
+FATAL:  Atom .R<LYS 231>.A<HE1 26> does not have a type.
+FATAL:  Atom .R<GLU 232>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 232>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<GLN 236>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<GLN 236>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<GLN 237>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<GLN 237>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<GLN 238>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<GLN 238>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<GLU 239>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 239>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<SER 240>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<GLN 244>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<GLN 244>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<LYS 245>.A<HB1 23> does not have a type.
+FATAL:  Atom .R<LYS 245>.A<HG1 24> does not have a type.
+FATAL:  Atom .R<LYS 245>.A<HD1 25> does not have a type.
+FATAL:  Atom .R<LYS 245>.A<HE1 26> does not have a type.
+FATAL:  Atom .R<GLU 247>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 247>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<LYS 248>.A<HB1 23> does not have a type.
+FATAL:  Atom .R<LYS 248>.A<HG1 24> does not have a type.
+FATAL:  Atom .R<LYS 248>.A<HD1 25> does not have a type.
+FATAL:  Atom .R<LYS 248>.A<HE1 26> does not have a type.
+FATAL:  Atom .R<GLU 249>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 249>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<ARG 252>.A<HB1 25> does not have a type.
+FATAL:  Atom .R<ARG 252>.A<HG1 26> does not have a type.
+FATAL:  Atom .R<ARG 252>.A<HD1 27> does not have a type.
+FATAL:  Atom .R<MET 253>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 253>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<ILE 255>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 255>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 255>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 255>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<ILE 256>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 256>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 256>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 256>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<MET 257>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 257>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<ILE 259>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 259>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 259>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 259>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<PHE 261>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<LEU 262>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<ILE 263>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 263>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 263>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 263>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<CYS 264>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<TRP 265>.A<HB1 25> does not have a type.
+FATAL:  Atom .R<LEU 266>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<PRO 267>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 267>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 267>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<TYR 268>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<GLY 270>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<PHE 273>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<TYR 274>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<ILE 275>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 275>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 275>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 275>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<PHE 276>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<HIP 278>.A<HB1 19> does not have a type.
+FATAL:  Atom .R<GLN 279>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<GLN 279>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<GLY 280>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<SER 281>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<ASP 282>.A<HB1 13> does not have a type.
+FATAL:  Atom .R<PHE 283>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<GLY 284>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<PRO 285>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 285>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 285>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<ILE 286>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 286>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 286>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 286>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<PHE 287>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<MET 288>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 288>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<ILE 290>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 290>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 290>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 290>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<PRO 291>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 291>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 291>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<PHE 293>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<PHE 294>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<RET 296>.A<C1 1> does not have a type.
+FATAL:  Atom .R<RET 296>.A<C2 2> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HC21 3> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HC22 4> does not have a type.
+FATAL:  Atom .R<RET 296>.A<C3 5> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HC31 6> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HC32 7> does not have a type.
+FATAL:  Atom .R<RET 296>.A<C4 8> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HC41 9> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HC42 10> does not have a type.
+FATAL:  Atom .R<RET 296>.A<C5 11> does not have a type.
+FATAL:  Atom .R<RET 296>.A<C6 12> does not have a type.
+FATAL:  Atom .R<RET 296>.A<C7 13> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HC71 14> does not have a type.
+FATAL:  Atom .R<RET 296>.A<C8 15> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HC81 16> does not have a type.
+FATAL:  Atom .R<RET 296>.A<C9 17> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CF 18> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCF1 19> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CI 20> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCI1 21> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CJ 22> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCJ1 23> does not have a type.
+FATAL:  Atom .R<RET 296>.A<C13 24> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CK 25> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCK1 26> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CM 27> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCM1 28> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CO 29> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCO1 30> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCO2 31> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCO3 32> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CP 33> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCP1 34> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCP2 35> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCP3 36> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CQ 37> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCQ1 38> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCQ2 39> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCQ3 40> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CU 41> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCU1 42> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCU2 43> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCU3 44> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CX 45> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCX1 46> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCX2 47> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HCX3 48> does not have a type.
+FATAL:  Atom .R<RET 296>.A<N 49> does not have a type.
+FATAL:  Atom .R<RET 296>.A<H 50> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CA 51> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HA 52> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CB 53> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HB1 54> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HB2 55> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CG 56> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HG1 57> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HG2 58> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CD 59> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HD1 60> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HD2 61> does not have a type.
+FATAL:  Atom .R<RET 296>.A<CE 62> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HE1 63> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HE2 64> does not have a type.
+FATAL:  Atom .R<RET 296>.A<NZ 65> does not have a type.
+FATAL:  Atom .R<RET 296>.A<HZ1 66> does not have a type.
+FATAL:  Atom .R<RET 296>.A<C 67> does not have a type.
+FATAL:  Atom .R<RET 296>.A<O 68> does not have a type.
+FATAL:  Atom .R<NTHR 297>.A<H 17> does not have a type.
+FATAL:  Atom .R<SER 298>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<TYR 301>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<ASN 302>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<PRO 303>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 303>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 303>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<ILE 305>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 305>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 305>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 305>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<TYR 306>.A<HB1 22> does not have a type.
+FATAL:  Atom .R<ILE 307>.A<HG11 20> does not have a type.
+FATAL:  Atom .R<ILE 307>.A<HD1 21> does not have a type.
+FATAL:  Atom .R<ILE 307>.A<HD2 22> does not have a type.
+FATAL:  Atom .R<ILE 307>.A<HD3 23> does not have a type.
+FATAL:  Atom .R<MET 308>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 308>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<MET 309>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 309>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<ASN 310>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<LYS 311>.A<HB1 23> does not have a type.
+FATAL:  Atom .R<LYS 311>.A<HG1 24> does not have a type.
+FATAL:  Atom .R<LYS 311>.A<HD1 25> does not have a type.
+FATAL:  Atom .R<LYS 311>.A<HE1 26> does not have a type.
+FATAL:  Atom .R<GLN 312>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<GLN 312>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<PHE 313>.A<HB1 21> does not have a type.
+FATAL:  Atom .R<ARG 314>.A<HB1 25> does not have a type.
+FATAL:  Atom .R<ARG 314>.A<HG1 26> does not have a type.
+FATAL:  Atom .R<ARG 314>.A<HD1 27> does not have a type.
+FATAL:  Atom .R<ASN 315>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<CYS 316>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<MET 317>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<MET 317>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<LEU 321>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<CYS 322>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<CYS 323>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<GLY 324>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<LYS 325>.A<HB1 23> does not have a type.
+FATAL:  Atom .R<LYS 325>.A<HG1 24> does not have a type.
+FATAL:  Atom .R<LYS 325>.A<HD1 25> does not have a type.
+FATAL:  Atom .R<LYS 325>.A<HE1 26> does not have a type.
+FATAL:  Atom .R<ASN 326>.A<HB1 15> does not have a type.
+FATAL:  Atom .R<PRO 327>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 327>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 327>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<LEU 328>.A<HB1 20> does not have a type.
+FATAL:  Atom .R<GLY 329>.A<HA1 8> does not have a type.
+FATAL:  Atom .R<ASP 330>.A<HB1 13> does not have a type.
+FATAL:  Atom .R<ASP 331>.A<HB1 13> does not have a type.
+FATAL:  Atom .R<GLU 332>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 332>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<SER 334>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<SER 338>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<LYS 339>.A<HB1 23> does not have a type.
+FATAL:  Atom .R<LYS 339>.A<HG1 24> does not have a type.
+FATAL:  Atom .R<LYS 339>.A<HD1 25> does not have a type.
+FATAL:  Atom .R<LYS 339>.A<HE1 26> does not have a type.
+FATAL:  Atom .R<GLU 341>.A<HB1 16> does not have a type.
+FATAL:  Atom .R<GLU 341>.A<HG1 17> does not have a type.
+FATAL:  Atom .R<SER 343>.A<HB1 12> does not have a type.
+FATAL:  Atom .R<GLN 344>.A<HB1 18> does not have a type.
+FATAL:  Atom .R<GLN 344>.A<HG1 19> does not have a type.
+FATAL:  Atom .R<PRO 347>.A<HD1 15> does not have a type.
+FATAL:  Atom .R<PRO 347>.A<HG1 16> does not have a type.
+FATAL:  Atom .R<PRO 347>.A<HB1 17> does not have a type.
+FATAL:  Atom .R<CALA 348>.A<OC1 12> does not have a type.
+FATAL:  Atom .R<CALA 348>.A<OC2 13> does not have a type.
+FATAL:  Atom .R<Cl 349>.A<Cl- 1> does not have a type.
+FATAL:  Atom .R<Cl 350>.A<Cl- 1> does not have a type.
+FATAL:  Atom .R<Cl 351>.A<Cl- 1> does not have a type.
+FATAL:  Atom .R<Cl 352>.A<Cl- 1> does not have a type.
+FATAL:  Atom .R<Cl 353>.A<Cl- 1> does not have a type.
+FATAL:  Atom .R<Cl 354>.A<Cl- 1> does not have a type.
+FATAL:  Atom .R<Na 355>.A<Na+ 1> does not have a type.
+FATAL:  Atom .R<Na 356>.A<Na+ 1> does not have a type.
+FATAL:  Atom .R<AT 357>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 357>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 357>.A<H2 3> does not have a type.
+FATAL:  Atom .R<AT 358>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 358>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 358>.A<H2 3> does not have a type.
+FATAL:  Atom .R<AT 359>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 359>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 359>.A<H2 3> does not have a type.
+FATAL:  Atom .R<AT 360>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 360>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 360>.A<H2 3> does not have a type.
+FATAL:  Atom .R<AT 361>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 361>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 361>.A<H2 3> does not have a type.
+FATAL:  Atom .R<AT 362>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 362>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 362>.A<H2 3> does not have a type.
+FATAL:  Atom .R<AT 363>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 363>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 363>.A<H2 3> does not have a type.
+FATAL:  Atom .R<AT 364>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 364>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 364>.A<H2 3> does not have a type.
+FATAL:  Atom .R<AT 365>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 365>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 365>.A<H2 3> does not have a type.
+FATAL:  Atom .R<AT 366>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 366>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 366>.A<H2 3> does not have a type.
+FATAL:  Atom .R<AT 367>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 367>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 367>.A<H2 3> does not have a type.
+FATAL:  Atom .R<AT 368>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 368>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 368>.A<H2 3> does not have a type.
+FATAL:  Atom .R<AT 369>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 369>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 369>.A<H2 3> does not have a type.
+FATAL:  Atom .R<AT 370>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 370>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 370>.A<H2 3> does not have a type.
+FATAL:  Atom .R<AT 371>.A<O 1> does not have a type.
+FATAL:  Atom .R<AT 371>.A<H1 2> does not have a type.
+FATAL:  Atom .R<AT 371>.A<H2 3> does not have a type.
+
+Error: Failed to generate parameters
+
+Warning: Parameter file was not saved.

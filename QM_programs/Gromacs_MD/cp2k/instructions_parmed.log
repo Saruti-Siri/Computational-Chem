@@ -1,0 +1,33 @@
+# Log started on 09/13/2021 [mm/dd/yyyy] at 14:56:23
+# Command line arguments: rhod_1.2.top
+# Loaded topologies: rhod_1.2.topchangeLJSingleType :SOL@HW 0.3019 0.047
+changeLJSingleType :SOL@HW1 0.3019 0.047
+printdetails
+printdetails SOL@HW1
+printdetails :SOL@HW1
+# Log started on 09/13/2021 [mm/dd/yyyy] at 16:04:03
+# Command line arguments: rhod_1.2.top
+# Loaded topologies: rhod_1.2.topprintdetails :SER,TYR,THR@H*
+changeLJSingleType :SOL@HW1 0.3019 0.047
+printdetails :SOL
+printdetails :SO
+changeLJSingleType :SOL@HW2 0.3019 0.047
+changeLJSingleType :SER@HG 0.3019 0.047
+changeLJSingleType :THR@HG1 0.3019 0.047
+changeLJSingleType @%HO,HW 0.3019 0.047
+changeLJSingleType @%HO 0.3019 0.047
+changeLJSingleType @%HW 0.3019 0.047
+printdetails @%HW 
+outparm rhod-mod.top
+quit
+
+!next time --> can use changeLJSingleType @%HO 0.3019 0.047! to change all atoms by /type name/
+! or /@%HW/ for water
+# Log started on 09/13/2021 [mm/dd/yyyy] at 16:16:40
+# Command line arguments: rhod-mod.top
+# Loaded topologies: rhod-mod.topshowdetails
+help
+printdetails %@HW
+printdetails @%HW
+printdetails @%HO
+quit

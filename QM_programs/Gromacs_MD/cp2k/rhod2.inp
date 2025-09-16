@@ -1,0 +1,279 @@
+&GLOBAL
+  PROJECT qmmm
+  PRINT_LEVEL MEDIUM
+  RUN_TYPE MD
+&END GLOBAL
+
+
+
+&FORCE_EVAL
+  METHOD QMMM
+  STRESS_TENSOR NONE
+  &DFT
+    WFN_RESTART_FILE_NAME qmmm-RESTART.wfn
+    CHARGE 0
+    BASIS_SET_FILE_NAME  /home/saruti/tmp/cp2k_data/BASIS_SET
+    POTENTIAL_FILE_NAME  /home/saruti/tmp/cp2k_data/POTENTIAL
+    MULTIPLICITY 1
+    &MGRID
+      COMMENSURATE .TRUE.
+      CUTOFF 400 !Finest grid
+!Constant REL_CUTOFF to converge CUTOFF
+      REL_CUTOFF 60 
+!Default
+      NGRIDS 4
+    &END MGRID
+    &QS
+      METHOD GAPW
+      WF_INTERPOLATION ASPC
+    &END QS
+    &SCF
+      MAX_SCF 50
+      EPS_SCF 1.0E-6
+      EPS_DIIS 0.1
+!      SCF_GUESS ATOMIC
+!For restart
+      SCF_GUESS RESTART
+      &OT
+       MINIMIZER CG
+       PRECONDITIONER FULL_ALL
+      &END OT
+
+      &OUTER_SCF
+        EPS_SCF 1.0E-6
+        MAX_SCF 10
+      &END
+      &PRINT
+        &RESTART 
+         ADD_LAST SYMBOLIC
+         &EACH
+          MD 100
+         &END EACH
+        &END RESTART
+        &RESTART_HISTORY
+          ADD_LAST SYMBOLIC
+          &EACH
+           MD 100
+          &END EACH
+        &END RESTART_HISTORY 
+      &END PRINT
+    &END SCF
+    &XC
+      &XC_FUNCTIONAL BLYP
+      &END XC_FUNCTIONAL
+    &END XC
+  &END DFT
+
+  &MM
+    &FORCEFIELD
+      PARMTYPE AMBER
+      PARM_FILE_NAME rhod-mod.parm
+      EI_SCALE14 0.8333333
+      VDW_SCALE14 0.5
+      &SPLINE
+        RCUT_NB [angstrom] 11
+	EMAX_SPLINE 12.5E-1
+      &END SPLINE
+    &END FORCEFIELD
+    &POISSON
+      PERIODIC XYZ
+      POISSON_SOLVER PERIODIC
+      &EWALD
+        EWALD_TYPE SPME
+!3.5/11 Angstrom
+        ALPHA 0.31818
+        GMAX  64 74 105
+!box size +1
+        EWALD_ACCURACY 1.0E-6
+      &END EWALD
+    &END POISSON
+    &PRINT
+     &FF_INFO ON
+     &END FF_INFO
+    &END PRINT
+  &END MM
+  &SUBSYS
+    &CELL
+      ABC [nm] 6.36099   7.40099   10.5029
+      ALPHA_BETA_GAMMA 90 90 90
+      PERIODIC XYZ
+!     SYMMETRY ORTHORHOMBIC
+    &END CELL
+    &KIND NA
+     ELEMENT NA
+    &END KIND
+    &KIND CL
+     ELEMENT CL
+    &END KIND
+    &KIND H
+     BASIS_SET 6-31G*
+     POTENTIAL ALL
+    &END KIND
+    &KIND O
+     BASIS_SET 6-31G*       
+     POTENTIAL ALL        
+    &END KIND
+    &KIND N
+     BASIS_SET 6-31G*       
+     POTENTIAL ALL         
+    &END KIND
+    &KIND C
+     BASIS_SET 6-31G*       
+     POTENTIAL ALL        
+    &END KIND
+    &KIND C2R1
+     ELEMENT C
+    &END KIND
+    &KIND C2R2
+     ELEMENT C
+    &END KIND
+    &KIND C2R3
+     ELEMENT C
+    &END KIND
+    &KIND C2R4
+     ELEMENT C
+    &END KIND
+    &KIND C2R5
+     ELEMENT C
+    &END KIND
+    &KIND C2R6
+     ELEMENT C
+    &END KIND
+    &KIND C2R7
+     ELEMENT C
+    &END KIND
+    &KIND C2R8
+     ELEMENT C
+    &END KIND
+    &KIND C2R9
+     ELEMENT C
+    &END KIND
+    &KIND C2R10
+     ELEMENT C
+    &END KIND
+    &KIND C2R11
+     ELEMENT C
+    &END KIND
+    &KIND C3R1
+     ELEMENT C
+    &END KIND
+    &KIND C3R2
+     ELEMENT C
+    &END KIND
+    &KIND C3R3
+     ELEMENT C
+    &END KIND
+    &KIND C3R4
+     ELEMENT C
+    &END KIND
+    &KIND C3R5
+     ELEMENT C
+    &END KIND
+    &KIND C3R6
+     ELEMENT C
+    &END KIND
+    &KIND C3R7
+     ELEMENT C
+    &END KIND
+    &KIND C3R8
+     ELEMENT C
+    &END KIND
+    &TOPOLOGY
+      CONN_FILE_FORMAT AMBER
+      CONN_FILE_NAME rhod-mod.parm
+      COORD_FILE_FORMAT PDB
+      COORD_FILE_NAME rhodfinal_1.2.pdb
+    &END TOPOLOGY
+  &END SUBSYS
+
+  &QMMM
+    ECOUPL GAUSS
+    NOCOMPATIBILITY
+!From https://www.cp2k.org/events:2016_summer_school:qmmm
+    USE_GEEP_LIB 7
+    &CELL
+      ABC [angstrom] 11.5 19 14.5
+      ALPHA_BETA_GAMMA 90 90 90
+    &END CELL
+    &QM_KIND C
+     MM_INDEX 4672 4674 4675 4678 4681 4684 4685 4686 4688 4690 4691 4693 4695 4697 4698 4700 4702 4706 4710 4714 4718 4724 4726 4729 4732 4735 4740 4744 4754
+    &END QM_KIND   
+    &QM_KIND O
+     MM_INDEX 4673 4741 4755
+    &END QM_KIND
+    &QM_KIND N
+     MM_INDEX 4722 4738 4742
+    &END QM_KIND 
+    &QM_KIND H
+     MM_INDEX  4676 4677 4679 4680 4682 4683 4687 4689 4692 4694 4696 4699 4701 4703 4704 4705 4707 4708 4709 4711 4712 4713 4715 4716 4717 4719 4720 4721 4723 4725 4727 4728 4730 4731 4733 4734 4736 4737 4739 4743 4745
+    &END QM_KIND
+!Separate link for each cut atom bond
+!ALA295 
+    &LINK
+      QM_KIND H
+      QM_INDEX 4672
+      MM_INDEX 4666
+      LINK_TYPE IMOMM
+      ALPHA_IMOMM 1.359 ! 1.522 / 1.12
+    &END LINK
+!THR297
+    &LINK
+      QM_KIND H
+      QM_INDEX 4744
+      MM_INDEX 4746
+      LINK_TYPE IMOMM
+      ALPHA_IMOMM 1.380 ! 1.449 / 1.05
+    &END LINK
+  &END QMMM
+&END FORCE_EVAL
+
+&MOTION
+  &MD
+  ENSEMBLE NVT
+  TIMESTEP [fs] 1
+  STEPS    300
+  TEMPERATURE 200
+  &THERMOSTAT
+    TYPE CSVR
+    REGION DEFINED
+    &CSVR
+      TIMECON [fs] 10
+    &END CSVR
+    &DEFINE_REGION
+     LIST 1..5516
+    &END
+    &DEFINE_REGION
+     LIST 5517..46731
+    &END
+  &END THERMOSTAT
+  &END MD
+
+  &CONSTRAINT
+   &HBONDS
+   &END HBONDS
+  &END CONSTRAINT
+
+   &PRINT
+    &RESTART                                    ! This section controls the printing of restart files
+      &EACH                                     ! A restart file will be printed every 50 md steps
+        MD 50
+      &END
+    &END
+    &RESTART_HISTORY                            ! This section controls dumping of unique restart files during the run keeping all of them.Most useful if recovery is needed at a later point.
+      &EACH                                     ! A new restart file will be printed every 50 md steps
+        MD 50
+      &END
+    &END
+    &TRAJECTORY                                 ! Thes section Controls the output of the trajectory
+      FORMAT XYZ                                ! Format of the output trajectory is XYZ
+      &EACH                                     ! New trajectory frame will be printed each 10 md steps
+        MD 10
+      &END
+    &END
+  &END PRINT
+&END MOTION
+
+&EXT_RESTART
+ RESTART_FILE_NAME qmmm-1.restart
+ RESTART_DEFAULT .TRUE.
+&END EXT_RESTART
